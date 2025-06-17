@@ -5,7 +5,7 @@ class ShiftBuilding {
   int? id;
   int? shiftId;
   int? buildingId;
-  Shift? shift;
+  Shifts? shift;
   Building? building;
 
   ShiftBuilding({
@@ -22,7 +22,7 @@ class ShiftBuilding {
         buildingId: json['building_id'] as int?,
         shift: json['shift'] == null
             ? null
-            : Shift.fromJson(json['shift'] as Map<String, dynamic>),
+            : Shifts.fromJson(json['shift'] as Map<String, dynamic>),
         building: json['building'] == null
             ? null
             : Building.fromJson(json['building'] as Map<String, dynamic>),

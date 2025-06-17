@@ -14,7 +14,10 @@ class StatusKawinHrdView extends GetView<StatusKawinController> {
     final StatusKawinController controller = Get.put(StatusKawinController());
     return Obx(() {
       bool isLoading = controller.isLoading.value;
-      final status = controller.liststatus;
+
+      final status = controller.searchQuery.value.isEmpty
+          ? controller.liststatus
+          : controller.status;
 
       if (isLoading) {
         return Center(child: LzLoader.bar());

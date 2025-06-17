@@ -19,7 +19,7 @@ class UpdateCutiController extends GetxController with Apis {
               await api.cuti.createData(payload).ui.loading('Menambahkan...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success(res.message);
+            Get.snackbar('Berhasil', res.message.toString());
           }
         } else {
           final res = await api.cuti
@@ -28,7 +28,7 @@ class UpdateCutiController extends GetxController with Apis {
               .loading('Memperbarui...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success(res.message);
+            Get.snackbar('Berhasil', res.message.toString());
           }
         }
       }

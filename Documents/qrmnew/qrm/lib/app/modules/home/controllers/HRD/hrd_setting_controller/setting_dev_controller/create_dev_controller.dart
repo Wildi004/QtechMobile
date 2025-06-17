@@ -12,6 +12,13 @@ class CreateDevController extends GetxController with Apis {
   File? file;
   RxString fileName = ''.obs;
   Rxn<Departemen> departemen = Rxn<Departemen>();
+  final aktif = [
+    {'id': 1, 'name': 'PT. Qinar Raya Mandiri'},
+  ];
+  Future<List<Map>> getAktif() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return aktif;
+  }
 
   Future onSubmit([int? id]) async {
     try {
@@ -21,6 +28,7 @@ class CreateDevController extends GetxController with Apis {
       if (form.ok) {
         final auth = await Auth.user();
         final payload = form.value;
+        payload['company_id'] = forms.extra('company_id');
 
         payload['user_id'] = auth.id;
 
@@ -31,7 +39,7 @@ class CreateDevController extends GetxController with Apis {
               .loading('Menambahkan...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success(res.message);
+            Get.snackbar('Berhasil', res.message.toString());
           }
         } else {
           final res = await api.departemen
@@ -40,7 +48,7 @@ class CreateDevController extends GetxController with Apis {
               .loading('Memperbarui...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success(res.message);
+            Get.snackbar('Berhasil', res.message.toString());
           }
         }
       }
@@ -52,7 +60,6 @@ class CreateDevController extends GetxController with Apis {
   List<Map<String, dynamic>> company = [];
 
   RxList<FormManager> members = RxList([]);
-
 
   Future openComapny(int index) async {
     try {

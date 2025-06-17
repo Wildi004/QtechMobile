@@ -57,7 +57,7 @@ class ArsipLamaranController extends GetxController with Apis {
 
       isLoading.refresh();
 
-      Toast.success('Data berhasil dihapus');
+      Get.snackbar('Berhasil', res.message ?? '');
     } catch (e, s) {
       Errors.check(e, s);
     }
@@ -65,7 +65,7 @@ class ArsipLamaranController extends GetxController with Apis {
 
   void updateSearchQuery(String query) {
     searchQuery.value = query.toLowerCase();
-     logg('Search query: $query');
+    logg('Search query: $query');
     arsip.value = listArsip
         .where((arsip) =>
             arsip.nama?.toLowerCase().contains(searchQuery.value) ?? false)

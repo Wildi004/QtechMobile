@@ -8,6 +8,7 @@ import 'package:qrm/app/modules/home/controllers/HRD/karyawan_tidak_tetap_contro
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/karyawan_tetap/tanda_tangan_karyawan.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/karyawan_tidak_tetap/detail_karyawan_tidak_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/karyawan_tidak_tetap/edit_karyawan_tidak_view.dart';
+import 'package:qrm/app/widgets/token_image_widget.dart';
 
 class SettingKaryawanTidakView extends StatelessWidget {
   final KaryawanTidak? data;
@@ -48,42 +49,11 @@ class SettingKaryawanTidakView extends StatelessWidget {
                   Center(
                     child: Column(
                       children: [
-                        Container(
-                          width: 130,
-                          height: 130,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black26,
-                                blurRadius: 6,
-                                offset: Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: data?.foto != null
-                              ? ClipOval(
-                                  child: Image.network(
-                                    'https://laravel.apihbr.link/storage/${data?.foto}',
-                                    width: 130,
-                                    height: 130,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Container(
-                                        color: Colors.blue,
-                                        child: const Icon(Icons.person,
-                                            size: 50, color: Colors.white),
-                                      );
-                                    },
-                                  ),
-                                )
-                              : Container(
-                                  color: Colors.blue,
-                                  alignment: Alignment.center,
-                                  child: const Icon(Icons.person,
-                                      size: 50, color: Colors.white),
-                                ),
-                        ),
+                        SizedBox(
+                            height: 100,
+                            width: 100,
+                            child: TokenImage(data?.foto ?? '')),
+
                         const SizedBox(height: 15),
                         Text(
                           textAlign: TextAlign.center,

@@ -42,8 +42,7 @@ class CreateSetCutiController extends GetxController with Apis {
               await api.cuti.createData(payload).ui.loading('Menambahkan...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success('Data berhasil ditambahkan, silahkan refresh');
-
+            Get.snackbar('Berhasil', res.message.toString());
           }
         } else {
           final res = await api.cuti
@@ -52,9 +51,7 @@ class CreateSetCutiController extends GetxController with Apis {
               .loading('Memperbarui...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success('Data berhasil diperbarui, silahkan refresh');
-
-            
+            Get.snackbar('Berhasil', res.message.toString());
           }
         }
       }

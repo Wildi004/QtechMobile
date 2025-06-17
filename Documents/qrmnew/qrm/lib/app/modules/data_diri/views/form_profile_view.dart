@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:qrm/app/data/services/image_file_token.dart';
 
 import '../controllers/form_profile_controller.dart';
 
@@ -11,7 +12,7 @@ class FormProfileView extends GetView<FormProfileController> {
   Widget build(BuildContext context) {
     Get.lazyPut(() => FormProfileController());
     final forms = controller.forms;
-
+    final ImageFileToken imageController = Get.put(ImageFileToken());
     return Scaffold(
         appBar: AppBar(
           title: const Text(
@@ -31,12 +32,21 @@ class FormProfileView extends GetView<FormProfileController> {
               Column(
                 children: [
                   Obx(() {
-                    final user = controller.user.value;
+                    final bytes = imageController.imageBytes.value;
 
-                    return LzImage(
-                      user?.image,
-                      size: 100,
-                    );
+                    return bytes != null
+                        ? Image.memory(
+                            bytes,
+                            width: 100,
+                            height: 100,
+                            fit: BoxFit.cover,
+                          )
+                        : Container(
+                            width: 100,
+                            height: 100,
+                            color: Colors.grey[300],
+                            child: const Icon(Icons.person),
+                          );
                   }),
                   SizedBox(height: 10),
                   ElevatedButton(

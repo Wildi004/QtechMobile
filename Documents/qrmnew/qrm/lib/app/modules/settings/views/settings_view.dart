@@ -3,6 +3,7 @@ import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/core/utils/extensions.dart';
 import 'package:qrm/app/data/apis/api.dart';
+import 'package:qrm/app/data/services/image_file_token.dart';
 import 'package:qrm/app/data/services/storage/auth.dart';
 import 'package:qrm/app/modules/bonus_karyawan/views/bonus_karyawan_view.dart';
 import 'package:qrm/app/modules/buku_bank/views/buku_bank_view.dart';
@@ -56,38 +57,61 @@ class SettingsView extends GetView<SettingsController> with Apis {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Obx(() {
-                          final user = controller.user.value;
+                          final imageController = Get.find<ImageFileToken>();
+                          final bytes = imageController.imageBytes.value;
+                          final url = controller.user.value?.image ?? '';
 
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                PageRouteBuilder(
-                                  transitionDuration:
-                                      Duration(milliseconds: 600),
-                                  reverseTransitionDuration:
-                                      Duration(milliseconds: 600),
-                                  pageBuilder: (context, animation,
-                                          secondaryAnimation) =>
-                                      FullScreenImageView(
-                                          imageUrl: user?.image ?? ''),
-                                  transitionsBuilder: (context, animation,
-                                      secondaryAnimation, child) {
-                                    return child;
-                                  },
-                                ),
-                              );
+                              if (bytes != null) {
+                                // Kirim bytes ke fullscreen biar langsung tampil
+                                Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    transitionDuration:
+                                        Duration(milliseconds: 600),
+                                    reverseTransitionDuration:
+                                        Duration(milliseconds: 600),
+                                    pageBuilder: (context, animation,
+                                            secondaryAnimation) =>
+                                        FullScreenImageView(
+                                            imageBytes: bytes, imageUrl: url),
+                                    transitionsBuilder: (context, animation,
+                                        secondaryAnimation, child) {
+                                      return child;
+                                    },
+                                  ),
+                                );
+                              } else if (url.isNotEmpty) {
+                                // Kalau bytes belum ada, fallback ke url langsung
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        FullScreenImageView(imageUrl: url),
+                                  ),
+                                );
+                              }
                             },
                             child: Hero(
                               tag: 'imageHero',
-                              child: LzImage(
-                                user?.image,
-                                size: 100,
-                              ),
+                              child: bytes != null
+                                  ? Image.memory(
+                                      bytes,
+                                      width: 100,
+                                      height: 100,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Container(
+                                      width: 100,
+                                      height: 100,
+                                      color: Colors.grey[300],
+                                      child: Icon(Icons.person),
+                                    ),
                             ),
                           );
                         }),
-                        const SizedBox(height: 5),
+                        SizedBox(height: 5),
                       ],
                     ),
                   ),

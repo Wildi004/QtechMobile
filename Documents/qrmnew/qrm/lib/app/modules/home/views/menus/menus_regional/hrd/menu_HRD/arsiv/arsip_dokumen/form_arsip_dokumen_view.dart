@@ -59,15 +59,15 @@ class FormArsipDokumenView extends GetView<FormArsipDokumenHrdController> {
                   children: [
                     LzImage(controller.file, size: 100),
                   ],
-                ).start)
+                ).start),
+          LzButton(
+            text: data == null ? 'Submit' : 'Update',
+            onTap: () {
+              controller.onSubmit(data?.id);
+            },
+          ).margin(all: 30),
         ],
       ),
-      bottomNavigationBar: LzButton(
-        text: data == null ? 'Submit' : 'Update',
-        onTap: () {
-          controller.onSubmit(data?.id);
-        },
-      ).margin(all: 20),
     );
   }
 }

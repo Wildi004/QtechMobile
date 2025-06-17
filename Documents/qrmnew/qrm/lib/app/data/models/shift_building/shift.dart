@@ -1,12 +1,12 @@
-class Shift {
+class Shifts {
   int? shiftId;
   String? shiftName;
   String? timeIn;
   String? timeOut;
 
-  Shift({this.shiftId, this.shiftName, this.timeIn, this.timeOut});
+  Shifts({this.shiftId, this.shiftName, this.timeIn, this.timeOut});
 
-  factory Shift.fromJson(Map<String, dynamic> json) => Shift(
+  factory Shifts.fromJson(Map<String, dynamic> json) => Shifts(
         shiftId: json['shift_id'] as int?,
         shiftName: json['shift_name'] as String?,
         timeIn: json['time_in'] as String?,
@@ -19,4 +19,7 @@ class Shift {
         'time_in': timeIn,
         'time_out': timeOut,
       };
+  static List<Shifts> fromJsonList(List? data) {
+    return (data ?? []).map((e) => Shifts.fromJson(e)).toList();
+  }
 }

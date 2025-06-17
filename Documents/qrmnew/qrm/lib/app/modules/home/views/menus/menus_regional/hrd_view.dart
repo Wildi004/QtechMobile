@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/core/utils/extensions.dart';
+import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/RAB/rab_hrd_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/absensi/jam_lokasi/absensi_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/arsiv/arsip_hrd_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/cuti/hrd_cuti_view.dart';
@@ -27,7 +28,8 @@ class HrdView extends StatelessWidget {
       'PTJ',
       'Laporan Kerja',
       'Surat Masuk',
-      'Surat Keluar'
+      'Surat Keluar',
+      'RAB',
     ];
 
     final colors = [
@@ -47,6 +49,7 @@ class HrdView extends StatelessWidget {
       '92b53e'.hex,
       '9f68dd'.hex,
       '2a84be'.hex,
+      '2a84be'.hex,
       'ff7581'.hex,
     ];
 
@@ -63,10 +66,12 @@ class HrdView extends StatelessWidget {
       Hi.checkList,
       Hi.mailOpen,
       Hi.mailDownload01,
+      Hi.note,
     ];
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
         title: Text(
           'Menu HRD',
@@ -116,6 +121,8 @@ class HrdView extends StatelessWidget {
                             context.openBottomSheet(PengajuanHrdView());
                           } else if (i == 8) {
                             context.openBottomSheet(PtjHrdView());
+                          } else if (i == 12) {
+                            context.openBottomSheet(RabHrdView());
                           }
                         },
                         child: Container(

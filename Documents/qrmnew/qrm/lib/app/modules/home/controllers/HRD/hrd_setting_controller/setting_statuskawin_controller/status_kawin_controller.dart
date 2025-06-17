@@ -44,7 +44,7 @@ class StatusKawinController extends GetxController with Apis {
 
       isLoading.refresh();
 
-      Toast.success('Data berhasil dihapus');
+      Get.snackbar('Berhasil', res.message.toString());
     } catch (e, s) {
       Errors.check(e, s);
     }

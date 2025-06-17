@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:qrm/app/data/models/ptj_hrd/ptj_hrd.dart';
 import 'package:qrm/app/modules/home/controllers/HRD/hrd_ptj_controller/ptj_sudah_validasi_controller.dart';
+
+import 'detail_ptj_hrd_view.dart';
 
 class PtjHrdSudahValidasiView extends GetView<PtjSudahValidasiController> {
   const PtjHrdSudahValidasiView({super.key});
@@ -56,6 +59,14 @@ class PtjHrdSudahValidasiView extends GetView<PtjSudahValidasiController> {
 
           ...data.generate((item, i) {
             return Touch(
+              onTap: () {
+                Get.to(() => DetailPtjHrdView(data: item))?.then((value) {
+                  if (value != null) {
+                    controller.updateData(PtjHrd.fromJson(value),
+                        int.parse(item.noHide.toString()));
+                  }
+                });
+              },
               margin: Ei.only(b: 10),
               child: Container(
                 width: itemWidth,

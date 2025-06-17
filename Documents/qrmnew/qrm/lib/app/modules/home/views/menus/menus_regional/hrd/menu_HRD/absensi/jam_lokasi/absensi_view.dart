@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/modules/home/controllers/HRD/hrd_absen_controller/absen_controller.dart';
+import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/absensi/building/building_hrd_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/absensi/holiday/libur_nasional_view.dart';
-import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/absensi/jam_lokasi/jam_lokasi_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/absensi/laporan/laporan_absensi_view.dart';
+import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/absensi/shift/shift_hrd_view.dart';
 
 class AbsensiView extends GetView<AbsenController> {
   const AbsensiView({super.key});
@@ -14,21 +15,28 @@ class AbsensiView extends GetView<AbsenController> {
     Get.lazyPut(() => AbsenController());
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text(
           "Jam Dan Lokasi",
           style: TextStyle(color: Colors.white, fontWeight: Fw.bold),
         ),
         centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 6, 91, 122),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+                colors: ['4CA1AF'.hex, '808080'.hex],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
         child: Column(
           children: [
-
             const SizedBox(height: 20),
-
             Obx(() {
               int active = controller.tabIndex.value;
               return Row(
@@ -37,7 +45,8 @@ class AbsensiView extends GetView<AbsenController> {
                   Expanded(
                     child: LzTabView(
                       tabs: const [
-                        'Jam dan lokasi',
+                        'jam',
+                        'Lokasi',
                         'Laporan absensi',
                         'Libur nasional',
                       ],
@@ -72,17 +81,17 @@ class AbsensiView extends GetView<AbsenController> {
                 ],
               );
             }),
-
             const SizedBox(height: 10),
-
             Expanded(
               child: Obx(() {
                 if (controller.tabIndex.value == 0) {
-                  return JamLokasiView();
-                } else if (controller.tabIndex.value == 2) {
+                  return ShiftHrdView();
+                } else if (controller.tabIndex.value == 3) {
                   return LiburNasionalView();
-                } else if (controller.tabIndex.value == 1) {
+                } else if (controller.tabIndex.value == 2) {
                   return LaporanAbsensiView();
+                } else if (controller.tabIndex.value == 1) {
+                  return BuildingHrdView();
                 }
                 return const SizedBox();
               }),

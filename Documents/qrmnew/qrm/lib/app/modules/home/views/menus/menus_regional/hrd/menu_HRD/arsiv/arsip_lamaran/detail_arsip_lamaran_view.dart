@@ -18,6 +18,7 @@ class DetailArsipLamaranView extends GetView<ArsipLamaranController> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
         title: Text(
           'Arsip Lamaran Detail',

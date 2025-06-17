@@ -6,18 +6,18 @@ class DetailJamlokasiView extends StatelessWidget {
     super.key,
     this.name,
     this.address,
-    this.time_in,
-    this.time_out,
+    this.timein,
+    this.timeout,
     this.radius,
-    this.latitude_longtitude,
+    this.latitudelongtitude,
   });
 
   final String? name;
   final String? address;
-  final String? time_in;
-  final String? time_out;
+  final String? timein;
+  final String? timeout;
   final String? radius;
-  final String? latitude_longtitude;
+  final String? latitudelongtitude;
 
   final OutlineInputBorder borderStyle = OutlineInputBorder(
     borderRadius: BorderRadius.circular(10),
@@ -26,25 +26,25 @@ class DetailJamlokasiView extends StatelessWidget {
 
   final TextEditingController namaController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
-  final TextEditingController time_inController = TextEditingController();
-  final TextEditingController time_outController = TextEditingController();
+  final TextEditingController timeinController = TextEditingController();
+  final TextEditingController timeoutController = TextEditingController();
   final TextEditingController radiusController = TextEditingController();
-  final TextEditingController latitude_longtitudeController =
+  final TextEditingController latitudelongtitudeController =
       TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     namaController.text = name ?? '';
     addressController.text = address ?? '';
-    time_inController.text = time_in ?? '';
-    time_outController.text = time_out ?? '';
+    timeinController.text = timein ?? '';
+    timeoutController.text = timeout ?? '';
     radiusController.text = radius ?? '';
-    latitude_longtitudeController.text = latitude_longtitude ?? '';
+    latitudelongtitudeController.text = latitudelongtitude ?? '';
 
-    if (latitude_longtitude != null &&
+    if (latitudelongtitude != null &&
         RegExp(r'^-?\d+(\.\d+)?\s*,\s*-?\d+(\.\d+)?$')
-            .hasMatch(latitude_longtitude!)) {
-      final parts = latitude_longtitude!.split(',');
+            .hasMatch(latitudelongtitude!)) {
+      final parts = latitudelongtitude!.split(',');
       final lat = double.tryParse(parts[0].trim());
       final lng = double.tryParse(parts[1].trim());
       if (lat != null && lng != null) {}
@@ -52,6 +52,7 @@ class DetailJamlokasiView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
         title:
             const Text('Jam dan lokasi', style: TextStyle(color: Colors.white)),
@@ -108,7 +109,7 @@ class DetailJamlokasiView extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     readOnly: true,
-                    controller: time_inController,
+                    controller: timeinController,
                     decoration: InputDecoration(
                       labelText: 'Jam Masuk',
                       labelStyle: const TextStyle(fontWeight: Fw.bold),
@@ -126,7 +127,7 @@ class DetailJamlokasiView extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     readOnly: true,
-                    controller: time_outController,
+                    controller: timeoutController,
                     decoration: InputDecoration(
                       labelText: 'Jam Pulang',
                       labelStyle: const TextStyle(fontWeight: Fw.bold),
@@ -162,7 +163,7 @@ class DetailJamlokasiView extends StatelessWidget {
             20.height,
             TextFormField(
               readOnly: true,
-              controller: latitude_longtitudeController,
+              controller: latitudelongtitudeController,
               maxLines: 1,
               decoration: InputDecoration(
                 labelText: 'latitude longtitude',

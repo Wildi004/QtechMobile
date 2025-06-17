@@ -12,4 +12,7 @@ class PtjHrdApi extends Fetchly {
 
   Future<Response> getDataBelum([Map<String, dynamic>? query]) async =>
       get('hrd/ptj/belum-validasi', query);
+
+  Future<Response> getDataByNoHide(String nohide) async =>
+      get('hrd/ptj/$nohide');
 }

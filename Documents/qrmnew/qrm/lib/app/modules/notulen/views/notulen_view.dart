@@ -93,8 +93,6 @@ class NotulenView extends GetView<NotulenController> {
   }
 }
 
-
-
 // class AbsensiView extends GetView<AbsenController> {
 //   const AbsensiView({super.key});
 

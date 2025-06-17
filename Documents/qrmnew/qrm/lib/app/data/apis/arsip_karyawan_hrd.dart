@@ -8,9 +8,12 @@ class ArsipKaryawanHrdApi extends Fetchly {
   Future<Response> getDataBarat([Map<String, dynamic>? query]) async =>
       get('arsip/karyawan/regional/barat', query);
 
-  Future<Response> createData(Map<String, dynamic> data) async =>
+  Future<Response> createData(
+    Map<String, dynamic> data,
+  ) async =>
       post('arsip/karyawan', data.toFormData());
   Future<Response> updateData(Map<String, dynamic> data, id) async =>
       put('arsip/karyawan/$id', data.toFormData());
-  Future<Response> deleteData(int id) async => delete('path/$id');
+
+  Future<Response> deleteData(int id) async => delete('arsip/karyawan/$id');
 }

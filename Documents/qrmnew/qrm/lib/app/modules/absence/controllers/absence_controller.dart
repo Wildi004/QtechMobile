@@ -11,6 +11,9 @@ class AbsenceController extends GetxController with Apis {
   RxBool isLoading = true.obs;
   Rxn<User> user = Rxn<User>();
 
+  List<User> users = [];
+  int page = 1;
+  Map<String, dynamic> get query => {'page': page, 'per_page': 10};
   List<Map<String, dynamic>> absensiData = [
     {
       "bulan": "Februari",
@@ -40,16 +43,12 @@ class AbsenceController extends GetxController with Apis {
     },
   ];
 
-  List<User> users = [];
-  int page = 1;
-  Map<String, dynamic> get query => {'page': page, 'per_page': 10};
-
   void showSnackbar() {
     if (!isSnackbarVisible.value) {
       isSnackbarVisible.value = true;
       Get.snackbar('Absen Pulang', 'Berhasil Absen Pulang');
 
-      Future.delayed(Duration(seconds: 4), () {
+      Future.delayed(const Duration(seconds: 4), () {
         isSnackbarVisible.value = false;
       });
     }
@@ -57,11 +56,14 @@ class AbsenceController extends GetxController with Apis {
 
   Future<void> getUserLogged() async {
     try {
+      isLoading.value = true;
       final auth = await Auth.user();
       final res = await api.user.getData(auth.id!);
       user.value = User.fromJson(res.data);
     } catch (e, s) {
       Errors.check(e, s);
+    } finally {
+      isLoading.value = false;
     }
   }
 

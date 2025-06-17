@@ -11,6 +11,7 @@ class HrdCutiSudahValidasiController extends GetxController with Apis {
   final forms = LzForm.make([
     "id",
     "user_id",
+    'dep_name',
     "dep_id",
     "tgl_cuti",
     "perihal",
@@ -58,8 +59,7 @@ class HrdCutiSudahValidasiController extends GetxController with Apis {
 
   Future<void> getDepartemenList() async {
     try {
-      final res = await api.departemen
-          .get('/departemen'); // Pastikan endpoint ini benar
+      final res = await api.departemen.get('/departemen');
       departemenList.value = Departemen.fromJsonList(res.data);
     } catch (e, s) {
       Errors.check(e, s);

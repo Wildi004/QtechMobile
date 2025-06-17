@@ -15,7 +15,9 @@ class CutiHrdView extends GetView<SettingCutiController> {
     Get.lazyPut(() => SettingCutiController());
     return Obx(() {
       bool isLoading = controller.isLoading.value;
-      final cuti = controller.listcuti;
+      final cuti = controller.searchQuery.value.isEmpty
+          ? controller.listcuti
+          : controller.cuti;
 
       if (isLoading) {
         return Center(child: LzLoader.bar());
@@ -56,20 +58,18 @@ class CutiHrdView extends GetView<SettingCutiController> {
               ),
               SizedBox(width: 10),
               // Button Tambah
-             LzButton(
-              
-                icon: Hi.addSquare,
-                onTap: () {
-                  Get.dialog(
-                     CreateCutiHrdView(),
-                    barrierDismissible: true,
-                  ).then((data) {
-                    if (data != null) {
-                      controller.insertData(Cuti.fromJson(data));
-                    }
-                  });
-                }
-              )
+              LzButton(
+                  icon: Hi.addSquare,
+                  onTap: () {
+                    Get.dialog(
+                      CreateCutiHrdView(),
+                      barrierDismissible: true,
+                    ).then((data) {
+                      if (data != null) {
+                        controller.insertData(Cuti.fromJson(data));
+                      }
+                    });
+                  })
             ],
           ),
           SizedBox(height: 20),

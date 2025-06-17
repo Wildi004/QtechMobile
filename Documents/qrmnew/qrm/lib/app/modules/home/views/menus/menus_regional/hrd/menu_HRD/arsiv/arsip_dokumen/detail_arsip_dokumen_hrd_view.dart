@@ -18,6 +18,7 @@ class DetailArsipDokumenHrdView extends GetView<ArsipDokumenHrdController> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
         title: Text(
           'Arsip Dokumen Detail',

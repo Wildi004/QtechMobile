@@ -14,7 +14,9 @@ class RegionalHrdView extends GetView<SettingRegionalController> {
     Get.lazyPut(() => SettingRegionalController());
     return Obx(() {
       bool isLoading = controller.isLoading.value;
-      final reg = controller.listReg;
+      final reg = controller.searchQuery.value.isEmpty
+          ? controller.listReg
+          : controller.reg;
 
       if (isLoading) {
         return Center(child: LzLoader.bar());

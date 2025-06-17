@@ -25,7 +25,6 @@ class CreateCutiHrdView extends GetView<CreateSetCutiController> {
             ),
             const SizedBox(height: 15),
             ...members.generate((data, i) => LzForm.select(
-
                   label: 'Pilih Peserta',
                   hint: 'Klik untuk memilih peserta',
                   model: data.key('user_id'),

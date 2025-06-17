@@ -32,4 +32,8 @@ class Building {
         'latitude_longtitude': latitudeLongtitude,
         'radius': radius,
       };
+
+  static List<Building> fromJsonList(List? data) {
+    return (data ?? []).map((e) => Building.fromJson(e)).toList();
+  }
 }

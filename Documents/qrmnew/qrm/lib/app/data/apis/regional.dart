@@ -8,4 +8,21 @@ class RegionalApi extends Fetchly {
   Future<Response> updateData(Map<String, dynamic> data, int id) async =>
       patch('regional/$id', data);
   Future<Response> deleteData(int id) async => delete('regional/$id');
+
+  Future<Response> getUserByRegional(String name) async => get(
+        'user/regional/$name',
+      );
+
+  Future<Response> getAllRegional(
+      {String? regional, String limit = 'all'}) async {
+    String url = 'user/regional';
+
+    if (regional != null && regional.isNotEmpty) {
+      url += '/$regional';
+    }
+
+    url += '?limit=$limit';
+
+    return get(url);
+  }
 }

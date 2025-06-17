@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:qrm/app/core/utils/extensions.dart';
 import 'package:qrm/app/data/apis/api.dart';
 import 'package:qrm/app/data/models/karyawan_tetap.dart';
+import 'package:qrm/app/data/services/image_file_token.dart';
 
 class KaryawanTetapController extends GetxController with Apis {
   RxBool isLoading = true.obs;
   RxString searchQuery = "".obs;
   var isExpanded = false.obs;
+  final ImageFileToken imageController = Get.put(ImageFileToken());
 
   Rxn<KaryawanTetap> user = Rxn<KaryawanTetap>();
 
@@ -18,7 +21,7 @@ class KaryawanTetapController extends GetxController with Apis {
   Map<String, dynamic> get query => {'page': page, 'per_page': 10};
 
   Future getData() async {
-    try { 
+    try {
       page = 1;
       isLoading.value = true;
       final res = await api.karyawanTetap.getData(query);
@@ -45,6 +48,24 @@ class KaryawanTetapController extends GetxController with Apis {
   Future onPageInit() async {
     try {
       await getData();
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
+  Future deleteData(int id) async {
+    try {
+      final res =
+          await api.karyawanTetap.deleteData(id).ui.loading('Menghapus...');
+      if (!res.status) {
+        return Toast.error(res.message);
+      }
+      listkaryawan.removeWhere((e) => e.id == id);
+
+      isLoading.refresh();
+
+      Get.snackbar('Berhasil', res.message ?? ' ');
+      Get.back(result: res.data);
     } catch (e, s) {
       Errors.check(e, s);
     }

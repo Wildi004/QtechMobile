@@ -33,10 +33,8 @@ class JamLokasiView extends GetView<AbsenController> {
         padding: Ei.sym(v: 20),
         onRefresh: () => controller.getBuilding(),
         children: [
-          // Row Search + Button Tambah
           Row(
             children: [
-              // Search Field
               Expanded(
                 child: TextField(
                   onChanged: controller.updateSearchQuery,
@@ -67,10 +65,10 @@ class JamLokasiView extends GetView<AbsenController> {
                 Get.to(() => DetailJamlokasiView(
                       name: item.building?.name ?? '',
                       address: item.building?.address ?? '',
-                      time_in: item.shift?.timeIn ?? '',
-                      time_out: item.shift?.timeOut ?? '',
+                      timein: item.shift?.timeIn ?? '',
+                      timeout: item.shift?.timeOut ?? '',
                       radius: item.building?.radius.toString(),
-                      latitude_longtitude:
+                      latitudelongtitude:
                           item.building?.latitudeLongtitude ?? '',
                     ));
               },

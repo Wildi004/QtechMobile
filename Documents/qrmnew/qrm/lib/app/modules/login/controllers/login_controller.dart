@@ -39,6 +39,7 @@ class LoginController extends GetxController with Apis {
         String token = res.data['token'];
         storage.write('token', token);
         storage.write('user', res.data);
+        logg('Login response: ${res.data}');
 
         // set token ke fetchly supaya bisa mengakses api lainnya
         Fetchly.setToken(token);
@@ -58,13 +59,15 @@ class LoginController extends GetxController with Apis {
   final email = TextEditingController();
 
   Future<bool> requestOtp() async {
-    final res = await api.auth.requestOTP(email.text).ui.loading('Memproses...');
+    final res =
+        await api.auth.requestOTP(email.text).ui.loading('Memproses...');
     return res.status;
   }
 
   // validasi kode otp
   Future<bool> validateOtp() async {
-    final res = await api.auth.requestOTP(email.text).ui.loading('Memproses...');
+    final res =
+        await api.auth.requestOTP(email.text).ui.loading('Memproses...');
     return res.status;
   }
 }

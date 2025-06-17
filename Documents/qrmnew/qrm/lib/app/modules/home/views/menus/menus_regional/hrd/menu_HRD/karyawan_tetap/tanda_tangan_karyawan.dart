@@ -1,11 +1,15 @@
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/data/models/karyawan_tetap.dart';
 import 'package:qrm/app/modules/home/controllers/HRD/hrd_karyawan_tetap_controller/edit_karyawan_controller.dart';
 import 'package:qrm/app/widgets/image_picker.dart';
+import 'package:qrm/app/widgets/token_image_widget.dart';
 
 class TandaTanganKaryawan extends GetView<EditKaryawanController> {
   const TandaTanganKaryawan({super.key, this.data});
@@ -24,6 +28,7 @@ class TandaTanganKaryawan extends GetView<EditKaryawanController> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
         title: Text(
           'Tanda Tangan',
@@ -47,45 +52,11 @@ class TandaTanganKaryawan extends GetView<EditKaryawanController> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Container(
-                      width: 130,
-                      height: 130,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 6,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: data?.image != null
-                          ? ClipOval(
-                              child: Image.network(
-                                'https://laravel.apihbr.link/storage/${data?.image}',
-                                width: 130,
-                                height: 130,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  return Container(
-                                    color: Colors.blue,
-                                    child: const Icon(Icons.person,
-                                        size: 50, color: Colors.white),
-                                  );
-                                },
-                              ),
-                            )
-                          : Container(
-                              color: Colors.blue,
-                              alignment: Alignment.center,
-                              child: const Icon(Icons.person,
-                                  size: 50, color: Colors.white),
-                            ),
-                    ),
+                    SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: TokenImage(data?.image ?? '')),
                     const SizedBox(height: 15),
-
-                    // Nama
                     Text(
                       textAlign: TextAlign.center,
                       data?.name ?? '',
@@ -94,7 +65,6 @@ class TandaTanganKaryawan extends GetView<EditKaryawanController> {
                         fontSize: 18,
                       ),
                     ),
-
                     const SizedBox(height: 25),
                   ],
                 ),
@@ -102,37 +72,26 @@ class TandaTanganKaryawan extends GetView<EditKaryawanController> {
             ),
           ),
 
-          // Gambar tanda tangan dari database
-          if (data?.ttd != null && data!.ttd!.isNotEmpty)
-            Container(
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Text('Tanda Tangan Sebelumnya',
-                      style: TextStyle(fontWeight: Fw.bold)),
-                  const SizedBox(height: 10),
-                  Image.network(
-                    'https://laravel.apihbr.link/storage/${data?.ttd}',
-                    width: 150,
-                    height: 100,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey.shade200,
-                        width: 150,
-                        height: 100,
-                        alignment: Alignment.center,
-                        child: const Icon(Icons.image_not_supported,
-                            color: Colors.grey),
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            ),
+          FutureBuilder<Uint8List>(
+            future: loadTtdImage(data?.ttd),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasError) {
+                return const Icon(Icons.broken_image, size: 50);
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Text('Tanda tangan tidak tersedia');
+              } else {
+                return Image.memory(
+                  snapshot.data!,
+                  width: 100,
+                  height: 50,
+                  fit: BoxFit.contain,
+                );
+              }
+            },
+          ),
 
-          // Form unggah tanda tangan
           LzForm.input(
             hint: 'Masukan Tanda Tangan Karyawan',
             label: 'Pilih file',
@@ -149,7 +108,6 @@ class TandaTanganKaryawan extends GetView<EditKaryawanController> {
             },
           ),
 
-          // Preview file yang baru dipilih
           Obx(() => controller.fileName.value.isEmpty
               ? const None()
               : Column(
@@ -174,4 +132,19 @@ class TandaTanganKaryawan extends GetView<EditKaryawanController> {
       ),
     );
   }
+}
+
+Future<Uint8List> loadTtdImage(String? path) async {
+  if (path == null || path.isEmpty) return Uint8List(0);
+
+  final token = GetStorage().read('token') ?? '';
+  final url = 'https://laravel.apihbr.link$path';
+
+  final response = await HttpClient().getUrl(Uri.parse(url)).then((req) {
+    req.headers.add('Authorization', 'Bearer $token');
+    return req.close();
+  });
+
+  final bytes = await consolidateHttpClientResponseBytes(response);
+  return bytes;
 }

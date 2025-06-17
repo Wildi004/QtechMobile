@@ -3,8 +3,9 @@ import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/modules/home/controllers/HRD/hrd_pengajuan_controller/create_pengajuan_hrd_controller.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/pengajuan_hrd/belum_validasi_pengajuan_view.dart';
-import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/pengajuan_hrd/create_pengajuan_hrd_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/pengajuan_hrd/pengajuan_sudah_validasi_view.dart';
+
+import 'form_pengajuan_hrd_view.dart';
 
 class PengajuanHrdView extends GetView<CreatePengajuanHrdController> {
   const PengajuanHrdView({super.key});
@@ -18,12 +19,16 @@ class PengajuanHrdView extends GetView<CreatePengajuanHrdController> {
         actions: [
           IconButton(
             onPressed: () async {
-              await controller.createPengajuan();
-              if (controller.pengajuanId.value != 0) {
-                Get.to(() => CreatePengajuanHrdView());
-              } else {
-                Get.snackbar('Gagal', 'Gagal membuat data pengajuan');
-              }
+              // ...
+              // open page
+              Get.to(() => FormPengajuanHrdView());
+
+              // await controller.createPengajuan();
+              // if (controller.pengajuanId.value != 0) {
+              //   Get.to(() => CreatePengajuanHrdView());
+              // } else {
+              //   Get.snackbar('Gagal', 'Gagal membuat data pengajuan');
+              // }
             },
             icon: Icon(Hi.add01),
             color: Colors.white,

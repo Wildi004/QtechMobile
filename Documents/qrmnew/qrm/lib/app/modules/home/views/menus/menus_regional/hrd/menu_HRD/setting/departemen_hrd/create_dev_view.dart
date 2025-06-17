@@ -33,10 +33,17 @@ class ShowForm extends GetView<CreateDevController> {
               hint: 'Departemen',
               label: 'Departemen',
               model: forms.key('departemen')),
-          LzForm.input(
-              hint: 'company_id',
-              label: 'company_id',
-              model: forms.key('company_id')),
+          LzForm.select(
+            hint: 'Company',
+            label: 'Company',
+            model: forms.key('company_id'),
+            onTap: () async {
+              final data = await controller.getAktif().overlay();
+              controller.forms
+                  .set('company_id')
+                  .options(data.labelValue('name', 'id'));
+            },
+          ),
           const SizedBox(height: 20),
           LzButton(
             text: data == null ? 'Submit' : 'Update',

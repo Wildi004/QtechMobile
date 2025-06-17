@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/data/models/karyawan_tetap.dart';
+import 'package:qrm/app/data/services/image_file_token.dart';
 import 'package:qrm/app/modules/home/controllers/HRD/hrd_karyawan_tetap_controller/karyawan_tetap_controller.dart';
+import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/karyawan_tetap/edit_karyawan_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/karyawan_tetap/setting_karyawan_tetap_view.dart';
 
 class KaryawanTetapViev extends StatelessWidget {
@@ -12,16 +14,28 @@ class KaryawanTetapViev extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageController = Get.put(ImageFileToken());
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white, // Warna ikon back
+        ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Hi.add01,
-              color: Colors.white,
-            ),
-          ),
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
+                  onPressed: () {
+                    Get.to(() => EditKaryawanView())?.then((data) {
+                      if (data != null) {
+                        controller.insertData(KaryawanTetap.fromJson(data));
+                      }
+                    });
+                  },
+                  icon: Icon(
+                    Hi.add01,
+                    color: Colors.white,
+                  ))),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Icon(
@@ -98,9 +112,14 @@ class KaryawanTetapViev extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: data.map((data) {
-                        String? imageUrl = data.image != null
-                            ? "https://laravel.apihbr.link/storage/${data.image}"
-                            : null;
+                        // String? imagePath = data.image;
+                        final int itemId = data.id ?? 0;
+
+                        // Jika belum dimuat, muat gambar dari server
+                        // if (imagePath != null &&
+                        //     !imageController.imageMap.containsKey(itemId)) {
+                        //   imageController.loadImages(imagePath, itemId);
+                        // }
 
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,8 +145,9 @@ class KaryawanTetapViev extends StatelessWidget {
                                         ).then((value) {
                                           if (value != null) {
                                             controller.updateData(
-                                                KaryawanTetap.fromJson(value),
-                                                data.id!);
+                                              KaryawanTetap.fromJson(value),
+                                              data.id!,
+                                            );
                                           }
                                         });
                                       },
@@ -138,14 +158,11 @@ class KaryawanTetapViev extends StatelessWidget {
                                         width: itemWidth,
                                         padding: const EdgeInsets.all(10),
                                         decoration: BoxDecoration(
-                                          gradient: LinearGradient(
+                                          gradient: const LinearGradient(
                                             colors: [
-                                              const Color.fromARGB(
-                                                  255, 54, 145, 220),
-                                              const Color.fromARGB(
-                                                  255, 73, 173, 255),
-                                              const Color.fromARGB(
-                                                  255, 14, 63, 210),
+                                              Color.fromARGB(255, 54, 145, 220),
+                                              Color.fromARGB(255, 73, 173, 255),
+                                              Color.fromARGB(255, 14, 63, 210),
                                             ],
                                           ),
                                           borderRadius:
@@ -171,54 +188,10 @@ class KaryawanTetapViev extends StatelessWidget {
                                   ),
                                 ),
 
-                                Positioned(
-                                  left: 0,
-                                  top: 5,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      if (imageUrl != null) {
-                                        Get.dialog(
-                                          Dialog(
-                                            backgroundColor: Colors.transparent,
-                                            child: InteractiveViewer(
-                                              panEnabled: true,
-                                              minScale: 0.5,
-                                              maxScale: 3.0,
-                                              child: Container(
-                                                width: 300,
-                                                height: 300,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image:
-                                                        NetworkImage(imageUrl),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: imageUrl != null
-                                              ? NetworkImage(imageUrl)
-                                              : const AssetImage(
-                                                      "assets/images/default.png")
-                                                  as ImageProvider,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                LzImage(
+                                  data.image,
+                                  size: 50,
+                                )
                               ],
                             ),
                             const SizedBox(height: 10),
@@ -238,3 +211,61 @@ class KaryawanTetapViev extends StatelessWidget {
     );
   }
 }
+/*ks\
+sPositioned(
+                                  left: 0,
+                                  top: 5,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      final bytes =
+                                          imageController.imageMap[itemId];
+                                      if (bytes != null) {
+                                        Get.dialog(
+                                          Dialog(
+                                            backgroundColor: Colors.transparent,
+                                            child: InteractiveViewer(
+                                              panEnabled: true,
+                                              minScale: 0.5,
+                                              maxScale: 3.0,
+                                              child: Container(
+                                                width: 300,
+                                                height: 300,
+                                                decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                    image: MemoryImage(bytes),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    child: Obx(() {
+                                      final bytes =
+                                          imageController.imageMap[itemId];
+
+                                      return SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        // decoration: BoxDecoration(
+                                        //   image: DecorationImage(
+                                        //     image: bytes != null
+                                        //         ? MemoryImage(bytes)
+                                        //         : const AssetImage(
+                                        //                 "assets/images/default.png")
+                                        //             as ImageProvider,
+                                        //     fit: BoxFit.cover,
+                                        //   ),
+                                        //   borderRadius:
+                                        //       BorderRadius.circular(20),
+                                        // ),
+                                        child: TokenImage(imagePath ?? ''),
+                                      );
+                                    }),
+                                  ),
+                                ),
+*/

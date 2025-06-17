@@ -9,36 +9,63 @@ class PerkaryawanView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(LaporanAbsensiController());
+    final forms = controller.forms;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 16,
       children: [
         LzForm.select(
-          label: 'Regional Karyawan',
-          model: controller.forms.key('city'),
-          onTap: () async {
-            final data = await controller.getreg().overlay();
-            controller.forms.set('city').options(data.labelValue('name', 'id'));
-          },
-        ),
+            label: 'Regional Karyawan',
+            hint: 'Pilih regional',
+            model: forms.key('regional'),
+            onTap: () async {
+              await controller.getRegional();
+            },
+            onChange: (_) {
+              forms.set('employee', '');
+            }),
         LzForm.select(
           label: 'Nama Karyawan',
-          model: controller.forms.key('province'),
+          hint: 'Pilih karyawan',
+          model: forms.key('employee'),
           onTap: () async {
-            final data = await controller.getkar().overlay();
-            controller.forms
-                .set('province')
-                .options(data.labelValue('name', 'id'));
+            await controller.getEmployee();
           },
         ),
-        LzForm.input(hint: 'Periode', readOnly: true),
-        const SizedBox(height: 6),
-        Text('Download PDF', style: Gfont.fs14),
-        const SizedBox(height: 6),
+        LzForm.radio(
+            label: 'Pilih Periode',
+            options: ['Bulan/Tahun', 'Tanggal'],
+            model: forms.key('periode')),
         LzForm.input(
-            prefixIcon: Hi.pdf01,
-            hint: 'File Absensi Setelah Filter',
-            readOnly: true),
+            label: 'Pilih Periode',
+            hint: 'Pilih periode',
+            model: forms.key('date'),
+            onTap: () {
+              final periode = forms.get('periode');
+
+              if (periode == 'Bulan/Tahun') {
+                LzPicker.date(context, format: 'm/y', minDate: DateTime(2018),
+                    onSelect: (value) {
+                  forms.set('date', value.format('yyyy-MM'));
+                  forms.set('bulan', value.format('MM'));
+                  forms.set('tahun', value.format('yyyy'));
+                });
+              } else if (periode == 'Tanggal') {
+                LzPicker.date(context, format: 'd/m/y', minDate: DateTime(2018),
+                    onSelect: (value) {
+                  forms.set('date', value.format('yyyy-MM-dd'));
+                });
+              } else {
+                Toast.show('Silakan pilih periode terlebih dahulu');
+              }
+            }),
+        LzButton(
+          text: 'Cetak Absensi',
+          onTap: () {
+            controller.onSubmit();
+          },
+        ).margin(all: 20),
       ],
     );
   }

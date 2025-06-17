@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/data/models/notulen/notulen.dart';
 import 'package:qrm/app/modules/home/controllers/HRD/hrd_absen_controller/absen_controller.dart';
-import 'package:qrm/app/modules/notulen/controllers/notulen_controller.dart';
 
 class AbsensiRegDetail extends GetView<AbsenController> {
   AbsensiRegDetail(
@@ -34,7 +33,7 @@ class AbsensiRegDetail extends GetView<AbsenController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.lazyPut(() => NotulenController());
+    Get.lazyPut(() => AbsenController());
     // final forms = controller.forms;
 
     // if (notulen != null) {
@@ -53,6 +52,7 @@ class AbsensiRegDetail extends GetView<AbsenController> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text(
           "Absensi",
           style: TextStyle(color: Colors.white, fontWeight: Fw.bold),

@@ -17,19 +17,22 @@ class NavbarWidget extends GetView<AppController> {
 
       return Padding(
         padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).size.width * 0.02,
-            left: MediaQuery.of(context).size.width * 0.06,
-            right: MediaQuery.of(context).size.width * 0.06,
-            top: MediaQuery.of(context).size.width * 0.003),
+          bottom: MediaQuery.of(context).size.width * 0.02,
+          left: MediaQuery.of(context).size.width * 0.06,
+          right: MediaQuery.of(context).size.width * 0.06,
+          top: MediaQuery.of(context).size.width * 0.003,
+        ),
         child: Container(
           padding: EdgeInsets.symmetric(
-              vertical: MediaQuery.of(context).size.width * 0.01,
-              horizontal: MediaQuery.of(context).size.width * 0.02),
+            vertical: MediaQuery.of(context).size.width * 0.01,
+            horizontal: MediaQuery.of(context).size.width * 0.02,
+          ),
           decoration: BoxDecoration(
             gradient: LinearGradient(
-                colors: ['4CA1AF'.hex, '808080'.hex],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter),
+              colors: ['4CA1AF'.hex, '808080'.hex],
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+            ),
             borderRadius: BorderRadius.circular(50),
             border: Border.all(color: const Color.fromARGB(66, 118, 13, 13)),
             boxShadow: [
@@ -56,8 +59,9 @@ class NavbarWidget extends GetView<AppController> {
                     borderRadius: BorderRadius.circular(10),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
-                          vertical: MediaQuery.of(context).size.width * 0.005,
-                          horizontal: MediaQuery.of(context).size.width * 0.02),
+                        vertical: MediaQuery.of(context).size.width * 0.005,
+                        horizontal: MediaQuery.of(context).size.width * 0.02,
+                      ),
                       child: Column(
                         children: [
                           Icon(
@@ -65,24 +69,23 @@ class NavbarWidget extends GetView<AppController> {
                             color: color,
                             size: MediaQuery.of(context).size.width * 0.066,
                           ),
-                          Text(labels[i],
-                              style: Gfont.fs12
-                                  .fcolor(
-                                    color,
-                                  )
-                                  .copyWith(
-                                      fontSize:
-                                          MediaQuery.of(context).size.width *
-                                              0.03)),
+                          Text(
+                            labels[i],
+                            style: Gfont.fs12.fcolor(color).copyWith(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.03,
+                                ),
+                          ),
                           AnimatedContainer(
                             duration: const Duration(milliseconds: 300),
                             height: 3,
                             width: 24,
                             decoration: BoxDecoration(
-                                color: navIndex == i
-                                    ? Colors.white
-                                    : Colors.transparent,
-                                borderRadius: BorderRadius.circular(2)),
+                              color: navIndex == i
+                                  ? Colors.white
+                                  : Colors.transparent,
+                              borderRadius: BorderRadius.circular(2),
+                            ),
                           )
                         ],
                       ),

@@ -4,8 +4,6 @@ class KaryawanTidak {
   String? name;
   String? noTelp;
   String? foto;
-  int? roleId;
-  int? depId;
   String? regional;
   String? alamatKtp;
   String? alamatDomisili;
@@ -13,14 +11,14 @@ class KaryawanTidak {
   String? tempatLahir;
   String? gender;
   String? agama;
-  int? statusKawinId;
   int? statusProyek;
-  int? proyekItemId;
   String? tglBergabung;
   int? isActive;
   int? dateCreated;
   String? role;
-  String? dept;
+  String? statusKawin;
+  String? proyekItem;
+  String? dep;
 
   KaryawanTidak({
     this.id,
@@ -28,8 +26,6 @@ class KaryawanTidak {
     this.name,
     this.noTelp,
     this.foto,
-    this.roleId,
-    this.depId,
     this.regional,
     this.alamatKtp,
     this.alamatDomisili,
@@ -37,14 +33,14 @@ class KaryawanTidak {
     this.tempatLahir,
     this.gender,
     this.agama,
-    this.statusKawinId,
     this.statusProyek,
-    this.proyekItemId,
     this.tglBergabung,
     this.isActive,
     this.dateCreated,
     this.role,
-    this.dept,
+    this.statusKawin,
+    this.proyekItem,
+    this.dep,
   });
 
   factory KaryawanTidak.fromJson(Map<String, dynamic> json) => KaryawanTidak(
@@ -53,8 +49,6 @@ class KaryawanTidak {
         name: json['name'] as String?,
         noTelp: json['no_telp'] as String?,
         foto: json['foto'] as String?,
-        roleId: json['role_id'] as int?,
-        depId: json['dep_id'] as int?,
         regional: json['regional'] as String?,
         alamatKtp: json['alamat_ktp'] as String?,
         alamatDomisili: json['alamat_domisili'] as String?,
@@ -62,14 +56,14 @@ class KaryawanTidak {
         tempatLahir: json['tempat_lahir'] as String?,
         gender: json['gender'] as String?,
         agama: json['agama'] as String?,
-        statusKawinId: json['status_kawin_id'] as int?,
         statusProyek: json['status_proyek'] as int?,
-        proyekItemId: json['proyek_item_id'] as int?,
         tglBergabung: json['tgl_bergabung'] as String?,
         isActive: json['is_active'] as int?,
         dateCreated: json['date_created'] as int?,
         role: json['role'] as String?,
-        dept: json['dept'] as String?,
+        statusKawin: json['status_kawin'] as String?,
+        proyekItem: json['proyek_item'] as String?,
+        dep: json['dep'] as String?,
       );
 
   Map<String, dynamic> toJson() => {
@@ -78,8 +72,6 @@ class KaryawanTidak {
         'name': name,
         'no_telp': noTelp,
         'foto': foto,
-        'role_id': roleId,
-        'dep_id': depId,
         'regional': regional,
         'alamat_ktp': alamatKtp,
         'alamat_domisili': alamatDomisili,
@@ -87,14 +79,14 @@ class KaryawanTidak {
         'tempat_lahir': tempatLahir,
         'gender': gender,
         'agama': agama,
-        'status_kawin_id': statusKawinId,
         'status_proyek': statusProyek,
-        'proyek_item_id': proyekItemId,
         'tgl_bergabung': tglBergabung,
         'is_active': isActive,
         'date_created': dateCreated,
         'role': role,
-        'dept': dept,
+        'status_kawin': statusKawin,
+        'proyek_item': proyekItem,
+        'dep': dep,
       };
 
   static List<KaryawanTidak> fromJsonList(List? data) {

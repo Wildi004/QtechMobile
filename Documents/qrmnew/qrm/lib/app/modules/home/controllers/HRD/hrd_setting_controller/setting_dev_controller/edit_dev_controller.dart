@@ -32,7 +32,7 @@ class EditDevController extends GetxController with Apis {
           if (res.status) {
             Get.back(result: res.data);
             Toast.success(
-                'Berhasil Update, silahkan refresh jika tidak ada perubahan'); 
+                'Berhasil Update, silahkan refresh jika tidak ada perubahan');
           }
         }
       }

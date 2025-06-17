@@ -34,8 +34,7 @@ class HolidayController extends GetxController with Apis {
 
   Future delete(int id) async {
     try {
-      final res =
-          await api.holiday.deleteData(id).ui.loading('Menghapus...');
+      final res = await api.holiday.deleteData(id).ui.loading('Menghapus...');
       if (!res.status) {
         return Toast.error(res.message);
       }
@@ -43,25 +42,25 @@ class HolidayController extends GetxController with Apis {
 
       isLoading.refresh();
 
-      Toast.success('Data berhasil dihapus');
+      Get.snackbar('Berhasil', res.message ?? '');
     } catch (e, s) {
       Errors.check(e, s);
     }
   }
 
   void updateSearchQuery(String query) {
-  searchQuery.value = query.toLowerCase();
+    searchQuery.value = query.toLowerCase();
 
-  for (var data in listHoly) {
-    logg('Deskripsi: ${data.description}');
+    for (var data in listHoly) {
+      logg('Deskripsi: ${data.description}');
+    }
+
+    holiday.value = listHoly
+        .where((data) =>
+            data.description?.toLowerCase().contains(searchQuery.value) ??
+            false)
+        .toList();
   }
-
-  holiday.value = listHoly
-      .where((data) =>
-          data.description?.toLowerCase().contains(searchQuery.value) ?? false)
-      .toList();
-}
-
 
   Future onPageInit() async {
     try {

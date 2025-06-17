@@ -14,7 +14,7 @@ class LiburNasionalView extends GetView<HolidayController> {
     final itemWidth = MediaQuery.of(context).size.width - 30;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
+      resizeToAvoidBottomInset: false,
       body: Obx(() {
         bool isLoading = controller.isLoading.value;
         final data = controller.holiday;

@@ -29,7 +29,7 @@ class FormNotulenController extends GetxController with Apis {
       logg(form.error);
       if (form.ok) {
         final payload = form.value;
-        
+
         logg(' Validasi form: $payload');
         logg(' Data form: ${form.value}');
         logg(form);

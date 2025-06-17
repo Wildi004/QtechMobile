@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
+import 'package:qrm/app/data/models/pengajuan_hrd/pengajuan_hrd.dart';
 import 'package:qrm/app/modules/home/controllers/HRD/hrd_pengajuan_controller/pengajuan_hrd_controller.dart';
+import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/pengajuan_hrd/detail_pengajuan_hrd_view.dart';
 
 class PengajuanSudahValidasiView extends GetView<PengajuanHrdController> {
   const PengajuanSudahValidasiView({super.key});
@@ -57,6 +59,14 @@ class PengajuanSudahValidasiView extends GetView<PengajuanHrdController> {
 
           ...data.generate((item, i) {
             return Touch(
+              onTap: () {
+                Get.to(() => DetailPengajuanHrdView(data: item))?.then((value) {
+                  if (value != null) {
+                    controller.updateData(
+                        PengajuanHrd.fromJson(value), item.noHide!);
+                  }
+                });
+              },
               margin: Ei.only(b: 10),
               child: Container(
                 width: itemWidth,
@@ -98,9 +108,8 @@ class PengajuanSudahValidasiView extends GetView<PengajuanHrdController> {
                           Row(
                             children: [
                               Text(
-                                item.detailHistory != null &&
-                                        item.detailHistory!.isNotEmpty
-                                    ? 'Rp ${item.detailHistory!.first.totalHarga}'
+                                item.detail != null && item.detail!.isNotEmpty
+                                    ? 'Rp ${item.detail!.first.totalHarga}'
                                     : 'tidak ada data',
                                 style: const TextStyle(color: Colors.white),
                               ),

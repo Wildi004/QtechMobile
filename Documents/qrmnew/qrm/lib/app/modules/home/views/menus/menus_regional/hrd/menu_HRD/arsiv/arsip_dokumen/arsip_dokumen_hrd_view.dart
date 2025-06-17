@@ -16,8 +16,10 @@ class ArsipDokumenHrdView extends GetView<ArsipDokumenHrdController> {
     return Obx(() {
       Get.lazyPut(() => ArsipDokumenHrdController());
       bool depLoad = controller.isLoading.value;
-      final dep = controller.listDoc;
 
+      final dep = controller.searchQuery.value.isEmpty
+          ? controller.listDoc
+          : controller.arsip;
       if (depLoad) {
         return Center(child: LzLoader.bar());
       }

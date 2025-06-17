@@ -16,7 +16,9 @@ class ArsipLamaranView extends GetView<ArsipLamaranController> {
     return Obx(() {
       Get.lazyPut(() => ArsipLamaranController());
       bool depLoad = controller.isLoading.value;
-      final dep = controller.listArsip;
+      final dep = controller.searchQuery.value.isEmpty
+          ? controller.listArsip
+          : controller.arsip;
 
       if (depLoad) {
         return Center(child: LzLoader.bar());

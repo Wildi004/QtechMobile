@@ -16,6 +16,7 @@ class ArsipBaratView extends GetView<ArsipKaryawanBaratController> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         centerTitle: true,
         title: Text(
           'Arsip Karyawan barat',

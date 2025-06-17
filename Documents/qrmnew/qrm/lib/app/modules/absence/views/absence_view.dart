@@ -3,6 +3,7 @@
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:flutter/material.dart';
+import 'package:qrm/app/data/services/image_file_token.dart';
 import 'package:qrm/app/data/services/storage/auth.dart';
 import 'package:qrm/app/modules/absence/controllers/absence_controller.dart';
 
@@ -15,6 +16,7 @@ class AbsenceView extends StatefulWidget {
 
 class _AbsenceViewState extends State<AbsenceView> {
   final AbsenceController controller = Get.put(AbsenceController());
+  final ImageFileToken imageController = Get.put(ImageFileToken());
   Map<String, bool> showDetails = {};
   @override
   Widget build(BuildContext context) {
@@ -44,12 +46,21 @@ class _AbsenceViewState extends State<AbsenceView> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Obx(() {
-                            final user = controller.user.value;
+                            final bytes = imageController.imageBytes.value;
 
-                            return LzImage(
-                              user?.image,
-                              size: 50,
-                            );
+                            return bytes != null
+                                ? Image.memory(
+                                    bytes,
+                                    width: 50,
+                                    height: 50,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Container(
+                                    width: 50,
+                                    height: 50,
+                                    color: Colors.grey[300],
+                                    child: const Icon(Icons.error),
+                                  );
                           }),
                           SizedBox(
                               width: MediaQuery.of(context).size.height * 0.02),

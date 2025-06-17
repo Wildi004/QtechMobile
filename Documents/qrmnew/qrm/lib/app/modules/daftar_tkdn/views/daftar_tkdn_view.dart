@@ -137,8 +137,6 @@ class DaftarTkdnView extends StatelessWidget {
                                           IconButton(
                                             padding: EdgeInsets.zero,
                                             onPressed: () {
-                                               
-
                                               Get.to(() => FormTkdn(data: data))
                                                   ?.then((value) {
                                                 if (value != null) {

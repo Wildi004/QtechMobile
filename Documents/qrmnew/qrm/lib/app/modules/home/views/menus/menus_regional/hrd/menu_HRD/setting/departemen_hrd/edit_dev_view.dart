@@ -12,12 +12,13 @@ class EditDevView extends GetView<EditDevController> {
   Widget build(BuildContext context) {
     Get.lazyPut(() => EditDevController());
     final forms = controller.forms;
-    
+
     if (data != null) {
       forms.fill(data!.toJson());
     }
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text(
           "Edit Dev",
           style: TextStyle(color: Colors.white),

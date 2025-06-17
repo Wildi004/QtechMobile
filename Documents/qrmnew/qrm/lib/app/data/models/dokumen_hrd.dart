@@ -40,7 +40,7 @@ class DokumenHrd {
         'created_at': createdAt,
         'user_name': userName,
       };
-  
+
   static List<DokumenHrd> fromJsonList(List? data) {
     return (data ?? []).map((e) => DokumenHrd.fromJson(e)).toList();
   }

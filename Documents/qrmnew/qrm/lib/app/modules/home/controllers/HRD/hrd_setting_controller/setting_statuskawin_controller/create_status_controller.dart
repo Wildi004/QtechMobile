@@ -29,7 +29,7 @@ class CreateStatusController extends GetxController with Apis {
               .loading('Menambahkan...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success('Data berhasil ditambahkan, silahkan refresh');
+            Get.snackbar('Berhasil', res.message.toString());
           }
         } else {
           final res = await api.statusKawin
@@ -38,8 +38,7 @@ class CreateStatusController extends GetxController with Apis {
               .loading('Memperbarui...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success('Data berhasil diperbarui');
-
+            Get.snackbar('Berhasil', res.message.toString());
           }
         }
       }

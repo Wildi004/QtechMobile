@@ -17,13 +17,9 @@ class FilterAbsensiView extends StatelessWidget {
           label: 'Filter Berdasarkan',
           hint: 'Pilih Filter',
           model: controller.forms.key('city'),
-          onTap: () async {
-            final data = await controller.getCities().overlay();
-            controller.forms.set('city').options(data.labelValue('name', 'id'));
-          },
+          onTap: () async {},
         ),
         const SizedBox(height: 6),
-        Text('Download PDF', style: Gfont.fs14),
         const SizedBox(height: 6),
         LzForm.input(
             prefixIcon: Hi.pdf01,

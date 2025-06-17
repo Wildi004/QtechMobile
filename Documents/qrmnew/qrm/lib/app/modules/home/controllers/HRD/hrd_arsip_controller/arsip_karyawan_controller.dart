@@ -1,8 +1,19 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:crypto/crypto.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Bindings;
 import 'package:lazyui/lazyui.dart';
+import 'package:open_file/open_file.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:qrm/app/core/utils/extensions.dart';
 import 'package:qrm/app/data/apis/api.dart';
 import 'package:qrm/app/data/models/arsip_karyawan_hrd/arsip_karyawan_hrd.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:qrm/app/data/services/storage/storage.dart';
+import 'package:http/http.dart' as http;
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart' as p;
 
 class ArsipKaryawanController extends GetxController with Apis {
   var dataKaryawan = [].obs;
@@ -30,6 +41,23 @@ class ArsipKaryawanController extends GetxController with Apis {
       Errors.check(e, s);
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<bool> isImageFile(String url) async {
+    try {
+      final token = await storage.read('token');
+      final response = await http.head(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      final contentType = response.headers['content-type'] ?? '';
+      return contentType.startsWith('image/');
+    } catch (_) {
+      return false;
     }
   }
 
@@ -63,6 +91,45 @@ class ArsipKaryawanController extends GetxController with Apis {
     isLoading.refresh();
   }
 
+  Future<ImageProvider?> getImageWithToken(String imageUrl) async {
+    try {
+      final token = await storage.read('token');
+      if (token == null) {
+        Toast.show('Token tidak ditemukan');
+        return null;
+      }
+
+      logg('Meminta gambar dari URL: $imageUrl');
+
+      final response = await http.get(
+        Uri.parse(imageUrl),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      logg('Status kode respons: ${response.statusCode}');
+      logg('Content-Type: ${response.headers['content-type']}');
+
+      if (response.statusCode == 200) {
+        final contentType = response.headers['content-type'] ?? '';
+        if (!contentType.startsWith('image/')) {
+          Toast.show('Bukan file gambar');
+          return null;
+        }
+
+        return MemoryImage(response.bodyBytes);
+      } else {
+        Toast.show('Gagal mengambil gambar');
+        return null;
+      }
+    } catch (e) {
+      logg('Error saat mengambil gambar: $e');
+      Toast.show('Terjadi kesalahan');
+      return null;
+    }
+  }
+
   void updateData(ArsipKaryawanHrd data, int id) {
     try {
       int index = listAK.indexWhere((e) => e.userId == id);
@@ -75,23 +142,68 @@ class ArsipKaryawanController extends GetxController with Apis {
     }
   }
 
-  void openFile(String filePath) async {
-    if (filePath.isEmpty) {
-      Toast.show('File path tidak ditemukan');
-      return;
+  Future<void> openFileWithToken(String fileUrl) async {
+    try {
+      final token = await storage.read('token');
+      if (token == null) {
+        Toast.show('Token tidak ditemukan');
+        return;
+      }
+
+      final response = await http.get(
+        Uri.parse(fileUrl),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final bytes = response.bodyBytes;
+
+        String ext = p.extension(Uri.parse(fileUrl).path);
+        if (ext.isEmpty || ext.length > 5) ext = '.bin';
+
+        final hash = md5.convert(utf8.encode(fileUrl)).toString();
+        final fileName = 'file_$hash$ext';
+
+        final tempDir = await getTemporaryDirectory();
+        final filePath = p.join(tempDir.path, fileName);
+        final file = File(filePath);
+
+        await file.writeAsBytes(bytes);
+
+        logg('File disimpan di: $filePath');
+        await OpenFile.open(file.path);
+      } else {
+        Toast.show('Gagal mengunduh file. Status: ${response.statusCode}');
+      }
+    } catch (e) {
+      logg('Gagal membuka file: $e');
+      Toast.show('Terjadi kesalahan saat membuka file');
     }
+  }
 
-    final baseUrl = 'https://laravel.apihbr.link/api/';
-    final fullUrl =
-        filePath.startsWith('http') ? filePath : '$baseUrl$filePath';
+  Future deletet(int id) async {
+    try {
+      final res =
+          await api.arsipKaryawanHrd.deleteData(id).ui.loading('Menghapus...');
 
-    final uri = Uri.tryParse(fullUrl);
-    logg('Opening file: $fullUrl');
+      if (!res.status) {
+        return Toast.error(res.message);
+      }
 
-    if (uri != null && await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      Toast.show('Gagal membuka file');
+      // Hapus dari listAK berdasarkan detail.id
+      listAK.removeWhere((e) {
+        final detailList =
+            e.detail; // Jika kamu pakai model, misalnya List<Detail>
+        return detailList?.any((d) => d.id == id) ?? false;
+      });
+
+      isLoading.refresh();
+
+      Get.snackbar('Berhasil', res.message ?? '');
+    } catch (e, s) {
+      Errors.check(e, s);
     }
   }
 

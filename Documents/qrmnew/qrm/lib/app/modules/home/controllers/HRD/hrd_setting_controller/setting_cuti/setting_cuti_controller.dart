@@ -43,15 +43,17 @@ class SettingCutiController extends GetxController with Apis {
 
       isLoading.refresh();
 
-      Toast.success('Data berhasil dihapus');
+      Get.snackbar('Berhasil', res.message.toString());
     } catch (e, s) {
       Errors.check(e, s);
     }
   }
-void insertData(Cuti data) {
+
+  void insertData(Cuti data) {
     listcuti.insert(0, data);
     isLoading.refresh();
   }
+
   void updateSearchQuery(String query) {
     searchQuery.value = query.toLowerCase();
     cuti.value = listcuti

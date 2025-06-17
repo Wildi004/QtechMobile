@@ -22,6 +22,7 @@ class CreateArsipLamaranView extends GetView<CreateArsipLamaranController> {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text(
           "Form Arsip Lamaran",
           style: TextStyle(color: Colors.white),
@@ -61,7 +62,9 @@ class CreateArsipLamaranView extends GetView<CreateArsipLamaranController> {
                 });
               }),
           LzForm.input(
-              hint: 'Posisi yang dilamar', label: 'posisi yang dilamar ', model: forms.key('posisi')),
+              hint: 'Posisi yang dilamar',
+              label: 'posisi yang dilamar ',
+              model: forms.key('posisi')),
           LzForm.input(
               hint: 'Lokasi Penempetan ',
               label: 'Lokasi Penempetan ',
@@ -72,9 +75,9 @@ class CreateArsipLamaranView extends GetView<CreateArsipLamaranController> {
             model: controller.forms.key('status'),
             onTap: () async {
               final data = await controller.getStatus().overlay();
-              controller.forms
-                  .set('status')
-                  .options(data.labelValue('name',));
+              controller.forms.set('status').options(data.labelValue(
+                    'name',
+                  ));
             },
           ),
           Obx(() => controller.fileName.value.isEmpty
@@ -83,15 +86,15 @@ class CreateArsipLamaranView extends GetView<CreateArsipLamaranController> {
                   children: [
                     LzImage(controller.file, size: 100),
                   ],
-                ).start)
+                ).start),
+          LzButton(
+            text: data == null ? 'Submit' : 'Update',
+            onTap: () {
+              controller.onSubmit(data?.id);
+            },
+          ).margin(all: 30),
         ],
       ),
-      bottomNavigationBar: LzButton(
-        text: data == null ? 'Submit' : 'Update',
-        onTap: () {
-          controller.onSubmit(data?.id);
-        },
-      ).margin(all: 20),
     );
   }
 }

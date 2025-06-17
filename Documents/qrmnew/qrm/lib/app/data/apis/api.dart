@@ -1,6 +1,17 @@
 // library api;
 
 import 'package:fetchly/fetchly.dart';
+part 'saldo_ptj.dart';
+
+part 'proyek_item.dart';
+part 'absensi.dart';
+part 'company.dart';
+part 'pengajuan_all.dart';
+part 'rabdetail.dart';
+part 'rab_validasi.dart';
+part 'rab.dart';
+part 'building.dart';
+part 'shift.dart';
 part 'dokumen_hrd.dart';
 part 'arsip_lamaran.dart';
 
@@ -41,6 +52,16 @@ part 'user.dart';
 part 'auth.dart';
 
 class Api extends ApiServices {
+  SaldoPtjApi saldoPtj = SaldoPtjApi();
+  ProyekItemApi proyekItem = ProyekItemApi();
+  AbsensiApi absensi = AbsensiApi();
+  CompanyApi company = CompanyApi();
+  PengajuanAllApi pengajuanAll = PengajuanAllApi();
+  RabdetailApi rabdetail = RabdetailApi();
+  RabValidasiApi rabValidasi = RabValidasiApi();
+  RabApi rab = RabApi();
+  BuildingApi building = BuildingApi();
+  ShiftApi shift = ShiftApi();
   DokumenHrdApi dokumenHrd = DokumenHrdApi();
   ArsipLamaranApi arsipLamaran = ArsipLamaranApi();
   ArsipKaryawanHrdApi arsipKaryawanHrd = ArsipKaryawanHrdApi();

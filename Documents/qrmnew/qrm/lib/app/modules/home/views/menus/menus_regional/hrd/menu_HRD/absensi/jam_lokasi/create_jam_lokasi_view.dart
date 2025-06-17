@@ -49,14 +49,17 @@ class CreateJamLokasiView extends GetView<CreateJamLokasiController> {
           LzForm.input(hint: ' ', label: 'Radius', model: forms.key('radius')),
           LzForm.input(
               hint: ' ', label: 'Map', model: forms.key('latitude_longtitude')),
+          LzButton(
+            text: data == null ? 'Submit' : 'Update',
+            onTap: () {
+              controller.onSubmit(data?.id);
+            },
+          ).margin(all: 20),
+          SizedBox(
+            height: 20,
+          )
         ],
       ),
-      bottomNavigationBar: LzButton(
-        text: data == null ? 'Submit' : 'Update',
-        onTap: () {
-          controller.onSubmit(data?.id);
-        },
-      ).margin(all: 20),
     );
   }
 }

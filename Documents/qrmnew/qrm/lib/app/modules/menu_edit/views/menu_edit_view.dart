@@ -32,6 +32,9 @@ class MenuEditView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: Colors.white,
+        ),
         centerTitle: true,
         title: Text(
           'Menu Favorite',

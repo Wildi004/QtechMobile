@@ -52,7 +52,7 @@ class CreateArsipLamaranController extends GetxController with Apis {
               .loading('Menambahkan...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success(res.message);
+            Get.snackbar('Berhasil', res.message ?? ' ');
           }
         } else {
           final res = await api.arsipLamaran
@@ -60,9 +60,8 @@ class CreateArsipLamaranController extends GetxController with Apis {
               .ui
               .loading('Memperbarui...');
           if (res.status) {
-            Toast.success(res.message);
-
             Get.back(result: res.data);
+            Get.snackbar('Berhasil', res.message ?? ' ');
           }
         }
       }

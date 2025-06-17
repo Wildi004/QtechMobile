@@ -31,7 +31,7 @@ class CreateHolidayController extends GetxController with Apis {
               .loading('Menambahkan...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success(res.message);
+            Get.snackbar('Berhasil', res.message ?? '');
           }
         } else {
           final res = await api.holiday
@@ -40,8 +40,7 @@ class CreateHolidayController extends GetxController with Apis {
               .loading('Memperbarui...');
           if (res.status) {
             Get.back(result: res.data);
-            Toast.success(res.message);
-
+            Get.snackbar('Berhasil', res.message ?? '');
           }
         }
       }

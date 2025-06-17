@@ -16,6 +16,7 @@ class SettingHrdView extends GetView<SettingDevController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text(
           "Setting",
           style: TextStyle(color: Colors.white, fontWeight: Fw.bold),

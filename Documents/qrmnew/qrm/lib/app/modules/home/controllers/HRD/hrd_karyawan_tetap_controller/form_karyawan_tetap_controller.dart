@@ -122,7 +122,7 @@ class FormKaryawanTetapController extends GetxController with Apis {
     }
   }
 
-  Future deletetdkn(int id) async {
+  Future deleteUser(int id) async {
     try {
       final res =
           await api.karyawanTetap.deleteData(id).ui.loading('Menghapus...');
@@ -133,7 +133,7 @@ class FormKaryawanTetapController extends GetxController with Apis {
 
       isLoading.refresh();
 
-      Toast.success('Data berhasil dihapus');
+      Get.snackbar('Berhasil', res.message.toString());
     } catch (e, s) {
       Errors.check(e, s);
     }

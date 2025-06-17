@@ -20,6 +20,7 @@ class DetailKaryawanTetapViev extends GetView<FormKaryawanTetapController> {
     }
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text(
           "Karyawan tetap detail",
           style: TextStyle(color: Colors.white),
@@ -176,14 +177,13 @@ class DetailKaryawanTetapViev extends GetView<FormKaryawanTetapController> {
             label: 'Golongan',
             enabled: false,
             model: forms.key('golongan'),
-            
           ),
-            LzForm.input(
+          LzForm.input(
             label: 'Foto Profile',
             enabled: false,
             model: forms.key('image'),
           ),
-           LzForm.input(
+          LzForm.input(
             label: 'Password',
             enabled: false,
             model: forms.key('password'),

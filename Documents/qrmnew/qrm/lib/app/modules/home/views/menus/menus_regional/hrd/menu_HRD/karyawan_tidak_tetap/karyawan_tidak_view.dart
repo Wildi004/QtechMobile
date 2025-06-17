@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/data/models/karyawan_tidak.dart';
+import 'package:qrm/app/data/services/image_file_token.dart';
 import 'package:qrm/app/modules/home/controllers/HRD/karyawan_tidak_tetap_controller/karyawan_tidak_tetap_controller.dart';
+import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/karyawan_tidak_tetap/create_karyawan_tidak_view.dart';
 import 'package:qrm/app/modules/home/views/menus/menus_regional/hrd/menu_HRD/karyawan_tidak_tetap/setting_karyawan_tidak_view.dart';
+import 'package:qrm/app/widgets/token_image_widget.dart';
 
 class KaryawanTidakView extends StatelessWidget {
   final KaryawanTidakTetapController controller =
@@ -14,23 +17,24 @@ class KaryawanTidakView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageController = Get.put(ImageFileToken());
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Hi.add01,
-              color: Colors.white,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Icon(
-              Hi.pdf01,
-              color: Colors.white,
-            ),
-          )
+          IconButton(
+              onPressed: () {
+                Get.to(() => CreateKaryawanTidakView())?.then((data) {
+                  if (data != null) {
+                    controller.insertData(KaryawanTidak.fromJson(data));
+                  }
+                });
+              },
+              icon: (Icon(
+                Hi.add01,
+                color: Colors.white,
+              )))
         ],
         centerTitle: true,
         title: Text(
@@ -100,10 +104,6 @@ class KaryawanTidakView extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: data.map((data) {
-                        String? imageUrl = data.foto != null
-                            ? "https://laravel.apihbr.link/storage/${data.foto}"
-                            : null;
-
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -174,54 +174,30 @@ class KaryawanTidakView extends StatelessWidget {
                                 ),
 
                                 // Gambar di kiri
-                                Positioned(
-                                  left: 0,
-                                  top: 5,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      if (imageUrl != null) {
-                                        Get.dialog(
-                                          Dialog(
-                                            backgroundColor: Colors.transparent,
-                                            child: InteractiveViewer(
-                                              panEnabled: true,
-                                              minScale: 0.5,
-                                              maxScale: 3.0,
-                                              child: Container(
-                                                width: 300,
-                                                height: 300,
-                                                decoration: BoxDecoration(
-                                                  image: DecorationImage(
-                                                    image:
-                                                        NetworkImage(imageUrl),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    child: Container(
-                                      width: 50,
-                                      height: 50,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: imageUrl != null
-                                              ? NetworkImage(imageUrl)
-                                              : const AssetImage(
-                                                      "assets/images/default.png")
-                                                  as ImageProvider,
-                                          fit: BoxFit.cover,
-                                        ),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                Obx(() {
+                                  final int itemId = data.id ?? 0;
+                                  final bytes =
+                                      imageController.imageMap[itemId];
+                                  String? imagePath = data.foto;
+
+                                  return SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    // decoration: BoxDecoration(
+                                    //   image: DecorationImage(
+                                    //     image: bytes != null
+                                    //         ? MemoryImage(bytes)
+                                    //         : const AssetImage(
+                                    //                 "assets/images/default.png")
+                                    //             as ImageProvider,
+                                    //     fit: BoxFit.cover,
+                                    //   ),
+                                    //   borderRadius:
+                                    //       BorderRadius.circular(20),
+                                    // ),
+                                    child: TokenImage(imagePath ?? ''),
+                                  );
+                                }),
                               ],
                             ),
                             const SizedBox(height: 10),

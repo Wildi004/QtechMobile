@@ -2,14 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lazyui/lazyui.dart';
 import 'package:qrm/app/data/apis/api.dart';
+import 'package:qrm/app/data/models/pengajuan_all/detail.dart';
+import 'package:qrm/app/data/models/pengajuan_all/pengajuan_all.dart';
 import 'package:qrm/app/data/models/pengajuan_hrd/pengajuan_hrd.dart';
 
 class PengajuanHrdController extends GetxController with Apis {
+  PengajuanHrd? data;
+  PengajuanAll? data1;
+  final isFilled = false.obs;
   RxString searchQuery = "".obs;
   RxInt tab = 0.obs;
-
+  final forms = LzForm.make([
+    'no_pengajuan',
+    'sub_total',
+    "tgl_pengajuan",
+    "item_id",
+    "rab_id",
+    "nama_barang",
+    "qty",
+    "harga",
+    'dep_name',
+    'jenis_rab',
+  ]);
   RxBool isLoading = true.obs;
   var isExpanded = false.obs;
+  RxList<FormManager> formRabs = RxList([]);
 
   List<PengajuanHrd> listPengajuan = [];
   RxList<PengajuanHrd> pengajuan = <PengajuanHrd>[].obs;
@@ -51,6 +68,20 @@ class PengajuanHrdController extends GetxController with Apis {
         .toList();
   }
 
+  PengajuanAll details = PengajuanAll();
+  RxList<Detail> cards = RxList([]);
+
+  Future getDetails(PengajuanHrd data) async {
+    try {
+      String nohide = data.noHide ?? '';
+      final res = await api.pengajuanHrd.getDataByNoHide(nohide);
+      details = PengajuanAll.fromJson(res.data ?? {});
+      cards.value = details.detail ?? [];
+    } catch (e, s) {
+      Errors.check(e, s);
+    }
+  }
+
   Future onPageInit() async {
     try {
       await getData();
@@ -62,6 +93,9 @@ class PengajuanHrdController extends GetxController with Apis {
   @override
   void onInit() {
     super.onInit();
+    if (data != null) {
+      forms.fill(data!.toJson());
+    }
     getData();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       onPageInit();
@@ -73,9 +107,9 @@ class PengajuanHrdController extends GetxController with Apis {
     isLoading.refresh();
   }
 
-  void updateData(PengajuanHrd data, int id) {
+  void updateData(PengajuanHrd data, String noHide) {
     try {
-      int index = listPengajuan.indexWhere((e) => e.id == id);
+      int index = listPengajuan.indexWhere((e) => e.noHide == noHide);
       if (index >= 0) {
         listPengajuan[index] = data;
         isLoading.refresh();

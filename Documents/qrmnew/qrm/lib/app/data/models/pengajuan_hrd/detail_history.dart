@@ -5,8 +5,9 @@ class DetailHistory {
   int? qty;
   int? harga;
   int? totalHarga;
-  int? createdAt;
+  String? jenisRab;
   String? noHide;
+  dynamic rabName;
 
   DetailHistory({
     this.id,
@@ -15,8 +16,9 @@ class DetailHistory {
     this.qty,
     this.harga,
     this.totalHarga,
-    this.createdAt,
+    this.jenisRab,
     this.noHide,
+    this.rabName,
   });
 
   factory DetailHistory.fromJson(Map<String, dynamic> json) => DetailHistory(
@@ -26,8 +28,9 @@ class DetailHistory {
         qty: json['qty'] as int?,
         harga: json['harga'] as int?,
         totalHarga: json['total_harga'] as int?,
-        createdAt: json['created_at'] as int?,
+        jenisRab: json['jenis_rab'] as String?,
         noHide: json['no_hide'] as String?,
+        rabName: json['rab_name'] as dynamic,
       );
 
   Map<String, dynamic> toJson() => {
@@ -37,8 +40,9 @@ class DetailHistory {
         'qty': qty,
         'harga': harga,
         'total_harga': totalHarga,
-        'created_at': createdAt,
+        'jenis_rab': jenisRab,
         'no_hide': noHide,
+        'rab_name': rabName,
       };
   static List<DetailHistory> fromJsonList(List data) {
     return data.map((e) => DetailHistory.fromJson(e)).toList();

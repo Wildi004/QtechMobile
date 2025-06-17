@@ -37,19 +37,19 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
               label: 'Konfirmasi Password',
               hint: 'Masukkan konfirmasi password',
               model: forms.key('password_confirmation'),
-              suffix: Obscure())
+              suffix: Obscure()),
+          LzButton(
+              text: 'Reset Password',
+              onTap: () async {
+                forms.set('email', email);
+                final ok = await controller.onSubmit();
+
+                if (ok == true) {
+                  context.lz.pop();
+                }
+              }).margin(blr: 20).lz.shadowed(context),
         ],
       ),
-      bottomNavigationBar: LzButton(
-          text: 'Reset Password',
-          onTap: () async {
-            forms.set('email', email);
-            final ok = await controller.onSubmit();
-
-            if (ok == true) {
-              context.lz.pop();
-            }
-          }).margin(blr: 20).lz.shadowed(context),
     );
   }
 }

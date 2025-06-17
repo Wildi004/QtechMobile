@@ -1,4 +1,4 @@
-import 'detail_history.dart';
+import 'package:qrm/app/data/models/pengajuan_hrd/detail_history.dart';
 
 class PengajuanHrd {
   int? id;
@@ -17,8 +17,10 @@ class PengajuanHrd {
   int? sttsCheck;
   String? createdName;
   String? updatedName;
+  dynamic approvalName;
+  dynamic aprrovedByName;
   String? depName;
-  List<DetailHistory>? detailHistory;
+  List<DetailHistory>? detail;
 
   PengajuanHrd({
     this.id,
@@ -37,8 +39,10 @@ class PengajuanHrd {
     this.sttsCheck,
     this.createdName,
     this.updatedName,
+    this.approvalName,
+    this.aprrovedByName,
     this.depName,
-    this.detailHistory,
+    this.detail,
   });
 
   factory PengajuanHrd.fromJson(Map<String, dynamic> json) => PengajuanHrd(
@@ -58,8 +62,10 @@ class PengajuanHrd {
         sttsCheck: json['stts_check'] as int?,
         createdName: json['created_name'] as String?,
         updatedName: json['updated_name'] as String?,
+        approvalName: json['approval_name'] as dynamic,
+        aprrovedByName: json['aprroved_by_name'] as dynamic,
         depName: json['dep_name'] as String?,
-        detailHistory: (json['detail_pengajuan'] as List<dynamic>?)
+        detail: (json['detail'] as List<dynamic>?)
             ?.map((e) => DetailHistory.fromJson(e as Map<String, dynamic>))
             .toList(),
       );
@@ -81,8 +87,10 @@ class PengajuanHrd {
         'stts_check': sttsCheck,
         'created_name': createdName,
         'updated_name': updatedName,
+        'approval_name': approvalName,
+        'aprroved_by_name': aprrovedByName,
         'dep_name': depName,
-        'detail_history': detailHistory?.map((e) => e.toJson()).toList(),
+        'detail': detail?.map((e) => e.toJson()).toList(),
       };
 
   static List<PengajuanHrd> fromJsonList(List? data) {

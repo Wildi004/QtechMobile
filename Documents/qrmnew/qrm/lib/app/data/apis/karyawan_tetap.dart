@@ -7,8 +7,11 @@ class KaryawanTetapApi extends Fetchly {
       post('karyawan/tetap', data.toFormData());
   Future<Response> updateData(Map<String, dynamic> data, int id) async =>
       post('karyawan/tetap/$id', {...data, '_method': 'patch'}.toFormData());
+
   Future<Response> deleteData(int id) async => delete('karyawan/tetap/$id');
 
-  Future<Response> updateTtd(Map<String, dynamic> data, int id) async =>
-      post('karyawan/tetap/ttd/$id', {...data, '_method': 'patch'}.toFormData());
+  Future<Response> updateTtd(Map<String, dynamic> data, int id) async => post(
+      'karyawan/tetap/ttd/$id', {...data, '_method': 'patch'}.toFormData());
+
+  Future<Response> getDataDetail(int id) async => get('karyawan/tetap/$id');
 }

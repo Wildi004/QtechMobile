@@ -23,10 +23,13 @@ class AppView extends GetView<AppController> {
             SettingsView(),
           ],
         ),
-        bottomNavigationBar: NavbarWidget(
-          onTap: (index) {
-            controller.onNavigate(index);
-          },
+        bottomNavigationBar: SafeArea(
+          top: false,
+          child: NavbarWidget(
+            onTap: (index) {
+              controller.onNavigate(index);
+            },
+          ),
         ),
       );
     });

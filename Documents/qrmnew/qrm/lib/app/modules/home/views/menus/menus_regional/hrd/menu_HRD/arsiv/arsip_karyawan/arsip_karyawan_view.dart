@@ -13,19 +13,6 @@ class ArsipKaryawanView extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "Cari...",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(vertical: 10),
-                ),
-              ),
-            ),
             Column(
               children: [
                 _buildGradientContainer("Kantor Pusat", [
@@ -35,14 +22,14 @@ class ArsipKaryawanView extends StatelessWidget {
                 ], () {
                   Get.to(() => ArsipPusat());
                 }),
-                _buildGradientContainer("Kantor Timur", [
+                _buildGradientContainer("Regional Timur", [
                   const Color.fromARGB(255, 54, 145, 220),
                   const Color.fromARGB(255, 73, 173, 255),
                   const Color.fromARGB(255, 14, 63, 210)
                 ], () {
                   Get.to(() => ArsipTimurView());
                 }),
-                _buildGradientContainer("Kantor Barat", [
+                _buildGradientContainer("Regional Barat", [
                   const Color.fromARGB(255, 54, 145, 220),
                   const Color.fromARGB(255, 73, 173, 255),
                   const Color.fromARGB(255, 14, 63, 210)
