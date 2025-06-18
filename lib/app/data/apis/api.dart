@@ -1,0 +1,106 @@
+// library api;
+
+import 'package:fetchly/fetchly.dart';
+part 'saldo_ptj.dart';
+
+part 'proyek_item.dart';
+part 'absensi.dart';
+part 'company.dart';
+part 'pengajuan_all.dart';
+part 'rabdetail.dart';
+part 'rab_validasi.dart';
+part 'rab.dart';
+part 'building.dart';
+part 'shift.dart';
+part 'dokumen_hrd.dart';
+part 'arsip_lamaran.dart';
+
+part 'arsip_karyawan_hrd.dart';
+part 'rk.dart';
+part 'ptj_hrd.dart';
+part 'pengajuan_hrd.dart';
+part 'hrd_cuti.dart';
+part 'saldo.dart';
+part 'shift_building.dart';
+part 'holiday.dart';
+part 'capaian.dart';
+part 'capaian_kerja.dart';
+part 'notulen_role.dart';
+part 'karyawan_tidak.dart';
+part 'role.dart';
+part 'karyawan_tetap.dart';
+part 'regional.dart';
+part 'status_kawin.dart';
+part 'departemen.dart';
+part 'arsip_pusat.dart';
+part 'role_akses.dart';
+part 'data_mandor.dart';
+part 'surat_internal.dart';
+part 'arsip_karyawan.dart';
+part 'capaian_kinerja.dart';
+part 'job_desk.dart';
+part 'surat_direksi.dart';
+part 'daftar_tkdn.dart';
+part 'brosur_logistik.dart';
+part 'data_proyek.dart';
+part 'modal_logistik.dart';
+part 'modal.dart';
+part 'notulen.dart';
+part 'kasbon.dart';
+part 'cuti.dart';
+part 'user.dart';
+part 'auth.dart';
+
+class Api extends ApiServices {
+  SaldoPtjApi saldoPtj = SaldoPtjApi();
+  ProyekItemApi proyekItem = ProyekItemApi();
+  AbsensiApi absensi = AbsensiApi();
+  CompanyApi company = CompanyApi();
+  PengajuanAllApi pengajuanAll = PengajuanAllApi();
+  RabdetailApi rabdetail = RabdetailApi();
+  RabValidasiApi rabValidasi = RabValidasiApi();
+  RabApi rab = RabApi();
+  BuildingApi building = BuildingApi();
+  ShiftApi shift = ShiftApi();
+  DokumenHrdApi dokumenHrd = DokumenHrdApi();
+  ArsipLamaranApi arsipLamaran = ArsipLamaranApi();
+  ArsipKaryawanHrdApi arsipKaryawanHrd = ArsipKaryawanHrdApi();
+  RkApi rk = RkApi();
+  PtjHrdApi ptjHrd = PtjHrdApi();
+  PengajuanHrdApi pengajuanHrd = PengajuanHrdApi();
+  HrdCutiApi hrdCuti = HrdCutiApi();
+  SaldoApi saldo = SaldoApi();
+  ShiftBuildingApi shiftBuilding = ShiftBuildingApi();
+  HolidayApi holiday = HolidayApi();
+  CapaianApi capaian = CapaianApi();
+  CapaianKerjaApi capaianKerja = CapaianKerjaApi();
+  NotulenRoleApi notulenRole = NotulenRoleApi();
+  KaryawanTidakApi karyawanTidak = KaryawanTidakApi();
+  RoleApi role = RoleApi();
+  KaryawanTetapApi karyawanTetap = KaryawanTetapApi();
+  RegionalApi regional = RegionalApi();
+  StatusKawinApi statusKawin = StatusKawinApi();
+  DepartemenApi departemen = DepartemenApi();
+  ArsipPusatApi arsipPusat = ArsipPusatApi();
+  RoleAksesApi roleAkses = RoleAksesApi();
+  DataMandorApi dataMandor = DataMandorApi();
+  SuratInternalApi suratInternal = SuratInternalApi();
+  ArsipKaryawanApi arsipKaryawan = ArsipKaryawanApi();
+  CapaianKinerjaApi capaianKinerja = CapaianKinerjaApi();
+  JobDeskApi jobDesk = JobDeskApi();
+  SuratDireksiApi suratDireksi = SuratDireksiApi();
+  DaftarTkdnApi daftarTkdn = DaftarTkdnApi();
+  BrosurLogistikApi brosurLogistik = BrosurLogistikApi();
+  DataProyekApi dataProyek = DataProyekApi();
+  ModalLogistikApi modalLogistik = ModalLogistikApi();
+  ModalApi modal = ModalApi();
+  NotulenApi notulen = NotulenApi();
+  KasbonApi kasbon = KasbonApi();
+  CutiApi cuti = CutiApi();
+  UserApi user = UserApi();
+  AuthApi auth = AuthApi();
+}
+
+mixin class Apis {
+  Api api = Api();
+}

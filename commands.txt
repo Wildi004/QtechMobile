@@ -1,0 +1,300 @@
+// To create a page:
+// (Pages have controller, view, and binding)
+// Note: you can use any name, ex: `get create page:login`
+// Nota: use this option if the chosen structure was Getx_pattern
+
+get create page:user
+no pengajuan 
+
+
+
+1. Paginasi dan add 
+2. Get data dan form dinamis
+3. 2 APi yang dinamis
+4. Get all capaian kinerja 
+5. download file 
+6. 
+
+misal kita mau buat halaman produk
+
+1. buat modul product 
+get create page:pengaturan
+4.3.0-rc.1.34
+2. buat API product menggunakan fatchly
+dart run fetchly:create saldo_ptj
+
+3. cek dokumentasi di website atau postman, misal seperti urlnya, datanya, dll
+
+4. coba jalankan apinya di postman, pastikan datanya didapat berupa json atau list json
+
+5. copas datanya lalu convert ke model dengan cara, buka di vscode ketik F1 lalu pilih Json to Dart: From Clipboard,
+    isi nama misal Product, setelah itu ikuti sampai selesai taruh di folder app/data/models
+
+6. jalankan perintah
+dart run fetchly:model saldo_ptj
+ untuk membuat method dokumen_hrd
+
+7. panggil api yang dibuat di controller dengan with Apis
+
+8. buat method yang dibutuhkan seperti getData, createData, update, dll
+
+menambahkan fitur Loading State Management untuk remove token saat user logout
+
+"data": {
+        "it": {
+            "status": true,
+            "message": "Berhasil mendapatkan data Capaian Kerja IT",
+            "data": {
+                "periode_awal": "2025-01",
+                "periode_akhir": "2025-03",
+                "waiting": 153,
+                "progres": 762,
+                "tercapai": 474,
+                "gagal": 0,
+                "total": 1389,
+                "team": [
+                    {
+                        "id": 200,
+                        "name": "Bareel Husein, S.Kom",
+                        "image": "users-image/c7a29d1d17f0d2d9b9e4dd06e1c9b57e.jpg",
+                        "waiting": 28,
+                        "progres": 117,
+                        "tercapai": 132,
+                        "gagal": 0,
+                        "total": 277,
+                        "periode_awal": "2025-01",
+                        "periode_akhir": "2025-03"
+                    },
+                    {
+                        "id": 374,
+                        "name": "I Made Reza Kharisma Putra,S.Kom",
+                        "image": "users-image/190010007_Reza4X6_(1).png",
+                        "waiting": 54,
+                        "progres": 306,
+                        "tercapai": 127,
+                        "gagal": 0,
+                        "total": 487,
+                        "periode_awal": "2025-01",
+                        "periode_akhir": "2025-03"
+                    },
+
+
+
+
+
+    "data": {
+        "it": {
+            "status": true,
+            "message": "Berhasil mendapatkan data Capaian Kerja IT",
+            "data": {
+                "periode_awal": "2025-01",
+                "periode_akhir": "2025-03",
+                "team": [
+                    
+                    {
+                        "id": 374,
+                        "name": "I Made Reza Kharisma Putra,S.Kom",
+                        "image": "users-image/190010007_Reza4X6_(1).png",
+                        " 
+                    },
+                     
+                     
+                ]
+            }
+        },
+        "hrd": {
+            "status": true,
+            "message": "Berhasil mendapatkan data Capaian Kerja HRD",
+            "data": {
+                "periode_awal": "2025-01",
+                "periode_akhir": "2025-04",
+                "team": [
+                    {
+                        "id": 320,
+                        "name": "Shafira Allaida",
+                        "image": "users-image/WhatsApp_Image_2023-07-14_at_16.33.05.jpeg",
+                        
+                         
+                    },
+                    {
+                        "id": 402,
+                        "name": "Dwi Putra Patintingan, S.Pd., M.Psi",
+                        "image": "users-image/56d0ba2891423a0c012fab69e1b00b3e.png",
+                        "waiting": 5,
+                        "progres": 386,
+                        "tercapai": 0,
+                        "gagal": 0,
+                        "total": 391,
+                        "periode_awal": "2025-02",
+                        "periode_akhir": "2025-04"
+                    }
+                ]
+            }
+        },
+        }
+
+
+
+
+
+        download file
+        menampilkan map
+        update tanpa input image
+        cara menampilkan data berdasarkan value
+
+
+ (Get data API) Menambahkan fitur select option role_id, dept_id, status_kawin_id, shift_id, building_id, is_active,agama, gender untuk Create karyawan tetap di menu karyawan HRD (Qtech Mobile)
+
+ (Create) Menambahkan fitur add karyawan tetap di menu karyawan HRD (Qtech Mobile)
+
+(Get data API) Menambahkan fitur select option gender, status_kawin_id, role_id, dep_id, regional, status_proyek, proyek_item_id, is_active untuk Create/Update karyawan tetap di menu karyawan HRD (Qtech Mobile)
+
+(Create) Menambahkan fitur add karyawan tidak tetap di menu karyawan HRD (Qtech Mobile)
+
+Menambahkan fitur auto refresh create karyawan tidak tetap
+
+(Update) Menambahkan fitur edit karyawan tidak tetap di menu karyawan HRD (Qtech Mobile)
+
+Menambahkan fitur auto refresh edit karyawan tidak tetap
+
+Design detail pengajuan data di menu Pengajuan HRD (Qtech Mobile)
+
+Integrasi API detail pengajuan dana HRD By NoHide
+
+
+
+
+
+
+
+
+
+
+ 
+// import 'dart:io';
+
+// import 'package:get/get.dart';
+// import 'package:lazyui/lazyui.dart';
+// import 'package:path_provider/path_provider.dart';
+// import 'package:qrm/app/core/utils/extensions.dart';
+// import 'package:qrm/app/data/apis/api.dart';
+// import 'package:qrm/app/modules/home/controllers/HRD/hrd_absen_controller/laporan_absensi/absensi_viewers.dart';
+
+// class LaporanAbsensiController extends GetxController with Apis {
+//   RxInt tab = 0.obs;
+
+//   final forms = LzForm.make(
+//       ['regional', 'employee', 'periode', 'date', 'bulan', 'tahun']);
+
+//   List<Map<String, dynamic>> dataRegional = [];
+
+//   Future getRegional() async {
+//     try {
+//       if (dataRegional.isEmpty) {
+//         final res = await api.regional.getData().ui.loading();
+//         dataRegional = List<Map<String, dynamic>>.from(res.data ?? []);
+//       }
+//       final options = dataRegional.labelValue('regional', 'id');
+//       forms.set('regional').options(options);
+//     } catch (e, s) {
+//       Errors.check(e, s);
+//     }
+//   }
+
+//   Map<String, List<Map<String, dynamic>>> dataEmployee = {};
+
+//   Future getEmployee() async {
+//     String? regionalName = forms.get('regional');
+
+//     if ([null, ''].contains(regionalName)) {
+//       return Toast.show('Anda belum memilih regional');
+//     }
+
+//     if ((dataEmployee[regionalName] ?? []).isEmpty) {
+//       final res = await api.regional
+//           .getAllRegional(regional: regionalName)
+//           .ui
+//           .loading();
+
+//       dataEmployee[regionalName.toString()] =
+//           List<Map<String, dynamic>>.from(res.data ?? []);
+//     }
+
+//     final options = (dataEmployee[regionalName] ?? []).labelValue('name', 'id');
+//     forms.set('employee').options(options);
+//   }
+
+//    Future<void> onSubmit() async {
+//   try {
+//     final periode = forms.get('periode');
+//     final karyawan = forms.extra('employee');
+
+//     if (karyawan == null || karyawan.toString().isEmpty) {
+//       Toast.show('Silakan pilih karyawan terlebih dahulu');
+//       return;
+//     }
+//     if (periode == null || periode.toString().isEmpty) {
+//       Toast.show('Silakan pilih periode terlebih dahulu');
+//       return;
+//     }
+
+//     final payload = {'karyawan': karyawan};
+
+//     if (periode == 'Bulan/Tahun') {
+//       final bulan = forms.get('bulan');
+//       final tahun = forms.get('tahun');
+//       if (bulan == null || tahun == null) {
+//         Toast.show('Silakan pilih bulan dan tahun');
+//         return;
+//       }
+//       payload['bulan-tahun'] = '$tahun-$bulan';
+//     } else if (periode == 'Tanggal') {
+//       final tanggal = forms.get('date');
+//       if (tanggal == null || tanggal.toString().isEmpty) {
+//         Toast.show('Silakan pilih tanggal');
+//         return;
+//       }
+//       payload['tanggal'] = tanggal;
+//     }
+
+//     logg('-- query: $payload');
+
+//     final response = await api.absensi.getDataAbsensi(payload).ui.loading();
+
+//     logg('-- response body type: ${response.body.runtimeType}');
+
+//     if (response.body is! List<int>) {
+//       Toast.show('File tidak valid');
+//       return;
+//     }
+
+//     final bytes = response.body as List<int>;
+
+//     final tempDir = await getTemporaryDirectory();
+//     final filePath =
+//         '${tempDir.path}/absensi_${DateTime.now().millisecondsSinceEpoch}.pdf';
+//     final file = File(filePath);
+//     await file.writeAsBytes(bytes, flush: true);
+
+//     logg('-- file path: $filePath');
+//     logg('-- file exists: ${await file.exists()}');
+//     logg('-- file size: ${await file.length()} bytes');
+
+//     if (await file.exists() && await file.length() > 0) {
+//       Get.to(() => PDFViewPage(filePath: filePath));
+//     } else {
+//       Toast.show('File kosong atau gagal disimpan');
+//     }
+//   } catch (e, s) {
+//     Errors.check(e, s);
+//   }
+// }
+
+// }
+
+
+Koordinasi dengan web dev terkait api image karyawan dan arsip karyawan
+
+Integrasi api saldo ke detail ptj di menu HRD PTJ (Qtech Mobile)
+
+(Get data API) Menambahkan fitur select option gender, status_kawin_id, role_id, dep_id, regional, status_proyek, proyek_item_id, is_active untuk Update karyawan tidak tetap di menu karyawan HRD (Qtech Mobile)
