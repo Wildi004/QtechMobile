@@ -1,0 +1,197 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lazyui/lazyui.dart';
+import 'package:qrm_dev/app/data/models/model%20logistik/del_pemb_ppn/del_pemb_ppn.dart';
+import 'package:qrm_dev/app/modules/home/controllers/LOGISTIK/Delivery%20Pembelian%20PPN%20Logistik/del_pemb_ppn_detail_controller.dart';
+import 'package:qrm_dev/app/widgets/custom_appbar_widget.dart';
+import 'package:qrm_dev/app/widgets/custom_loading.dart';
+import 'package:qrm_dev/app/widgets/custom_status_validasi.dart';
+
+class DelPembPpnDetailView extends GetView<DelPembPpnDetailController> {
+  final DelPembPpn? data;
+  final bool showPrintButton;
+
+  const DelPembPpnDetailView({
+    super.key,
+    this.data,
+    this.showPrintButton = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    Get.put(DelPembPpnDetailController());
+
+    final forms = controller.forms;
+
+    if (data != null) {
+      forms.fill(data!.toJson());
+      controller.data = data;
+      final datas = data!.toJson();
+
+      forms.fill(datas);
+
+      if (controller.formDetails.isEmpty) {
+        controller.getDetails(data!);
+      }
+    }
+
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        appBar: CustomAppbar(
+          title: 'Detail Delivery Pembelian',
+          actions: [
+            // IconButton(
+            //   onPressed: () {
+            //     final cetakController = Get.put(CetakPoPpn());
+            //     cetakController.getDataCetak(data!.noHide);
+            //   },
+            //   icon: Icon(Hi.printer),
+            // )
+          ],
+        ).appBar,
+        body: Obx(() {
+          if (controller.isLoading.value) {
+            return CustomLoading();
+          }
+
+          return Column(
+            children: [
+              Expanded(
+                child: LzListView(
+                  gap: 10,
+                  children: [
+                    LzForm.input(
+                      label: 'No. Delivery',
+                      enabled: false,
+                      model: forms.key('no_delivery'),
+                    ),
+                    LzForm.input(
+                      label: 'No. Pembelian',
+                      enabled: false,
+                      model: forms.key('no_pembelian'),
+                    ),
+                    Intrinsic(
+                      gap: 10,
+                      children: [
+                        LzForm.input(
+                          label: 'Shipment Date',
+                          enabled: false,
+                          model: forms.key('shipment_date'),
+                        ),
+                        LzForm.input(
+                          label: 'Received Date',
+                          enabled: false,
+                          model: forms.key('received_date'),
+                        ),
+                      ],
+                    ),
+                    Intrinsic(
+                      gap: 10,
+                      children: [
+                        LzForm.input(
+                          label: 'Lokasi Kirim',
+                          enabled: false,
+                          model: forms.key('lokasi_pengiriman'),
+                        ),
+                        LzForm.input(
+                          label: 'Penerima',
+                          enabled: false,
+                          model: forms.key('penerima'),
+                        ),
+                      ],
+                    ),
+                    Intrinsic(
+                      gap: 10,
+                      children: [
+                        LzForm.input(
+                          label: 'Ekspedisi',
+                          enabled: false,
+                          model: forms.key('ekspedisi'),
+                        ),
+                      ],
+                    ),
+                    Intrinsic(
+                      gap: 10,
+                      children: [
+                        LzForm.input(
+                          label: 'Total Berat(KG)',
+                          enabled: false,
+                          model: forms.key('total_berat'),
+                        ),
+                        LzForm.input(
+                          label: 'Harga Ekpedisi',
+                          enabled: false,
+                          model: forms.key('harga_ekspedisi'),
+                        ),
+                      ],
+                    ),
+                    ...List.generate(controller.formDetails.length, (i) {
+                      final form = controller.formDetails[i];
+
+                      return LzCard(
+                        gap: 10,
+                        padding: Ei.all(10),
+                        children: [
+                          Text(
+                            'Barang ${i + 1}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+
+                          // 🔹 Field-field form detail
+
+                          LzForm.input(
+                            enabled: false,
+                            label: 'Nama Barang',
+                            maxLines: 4,
+                            model: form.key('nama_barang'),
+                          ),
+                          Intrinsic(
+                            gap: 10,
+                            children: [
+                              LzForm.input(
+                                enabled: false,
+                                label: 'Qty',
+                                model: form.key('qty'),
+                              ),
+                            ],
+                          ),
+
+                          LzForm.input(
+                            enabled: false,
+                            label: 'Berat Satuan',
+                            model: form.key('berat_satuan'),
+                          ),
+                        ],
+                      );
+                    }),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Status Validasi',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 15),
+                        statusValidasiRow('GM : ', data?.statusGmRegional),
+                        SizedBox(height: 15),
+                        statusValidasiRow(
+                            'Dir Keuangan : ', data?.statusDirKeuangan),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }),
+      ),
+    );
+  }
+}

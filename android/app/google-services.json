@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "907674794658",
+    "project_id": "q-tech-mobile",
+    "storage_bucket": "q-tech-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:907674794658:android:36ebe9e11849de2bb735fb",
+        "android_client_info": {
+          "package_name": "com.example.qrm_dev"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBHvpVJTCmanhrsPGTqYwBpMmpksXGk-3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

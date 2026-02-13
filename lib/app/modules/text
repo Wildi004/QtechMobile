@@ -1,0 +1,736 @@
+SizedBox(
+            height: 100, 
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(3, (index) {
+                  return Container(
+                    width: 200,
+                    height: 100,
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      color: '302C7B'.hex,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20,top: 15),
+                      child: Column(
+                        crossAxisAlignment: Caa.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          if (index == 0) ...[
+                            Text(''
+                              // 'Item ${index + 1}\nDeskripsi 1\nDeskripsi 2',
+                              // style: const TextStyle(
+                              //     color: Colors.white, fontSize: 14),
+                              // textAlign: TextAlign.start,
+                            ),
+                          ] else if (index == 1) ...[
+                            const Text(
+                              'Rapat Direksi!',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Sabtu, 4 Januari 2025',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                            Row(
+                              children: [
+                                Icon(Icons.location_on_outlined,color: Colors.white,),
+                                SizedBox(width: 5,),
+                                Text(
+                                  "Q'offee Shop - Diponegoro",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ] else ...[
+                            Text(''
+                              // 'Item ${index + 1}',
+                              // style: const TextStyle(
+                              //     color: Colors.white, fontSize: 16),
+                            ),
+                            const SizedBox(height: 5),
+                            const Text(''
+                            ),
+                            const SizedBox(height: 5),
+                            const Text(''
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ),
+
+
+
+
+          SizedBox(
+            height: 100, 
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: List.generate(3, (index) {
+                  return Container(
+                    width: 200,
+                    height: 100,
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      color: '302C7B'.hex,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20,top: 15),
+                      child: Column(
+                        crossAxisAlignment: Caa.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          if (index == 0) ...[
+                            Text(''
+                              // 'Item ${index + 1}\nDeskripsi 1\nDeskripsi 2',
+                              // style: const TextStyle(
+                              //     color: Colors.white, fontSize: 14),
+                              // textAlign: TextAlign.start,
+                            ),
+                          ] else if (index == 1) ...[
+                            const Text(
+                              'Rapat Direksi!',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              'Sabtu, 4 Januari 2025',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                            Row(
+                              children: [
+                                Icon(Icons.location_on_outlined,color: Colors.white,),
+                                SizedBox(width: 5,),
+                                Text(
+                                  "Q'offee Shop - Diponegoro",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ] else ...[
+                            Text(''
+                              // 'Item ${index + 1}',
+                              // style: const TextStyle(
+                              //     color: Colors.white, fontSize: 16),
+                            ),
+                            const SizedBox(height: 5),
+                            const Text(''
+                            ),
+                            const SizedBox(height: 5),
+                            const Text(''
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ),
+
+
+
+
+          Widget _buildInfoBox(String number, String unit, String label) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      child: Column(
+        children: [
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: number,
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold),
+                ),
+                TextSpan(
+                  text: " $unit",
+                  style: const TextStyle(color: Colors.white, fontSize: 10),
+                ),
+              ],
+            ),
+          ),
+          Text(label,
+              style: const TextStyle(color: Colors.white, fontSize: 12)),
+        ],
+      ),
+    );
+  }
+
+
+
+
+  // LzListView(
+      //   gap: 20,
+      //   padding: Ei.only(t: 250 - 50, b: 100),
+      //   children: [
+      //     Container(
+      //       padding: Ei.sym(h: 20, v: 20),
+      //       decoration: BoxDecoration(border: Br.only(['t'], width: 3)),
+      //       child: Column(
+      //         children: [
+      //           // account menu
+      //           Text('Menu', style: Gfont.fs20.bold),
+
+      //           AccountOption(
+      //             options: [
+      //               'Settings',
+      //               'Privacy',
+      //               'About',
+      //             ].generate((l, i) => Menu(
+      //                 l,
+      //                 [
+      //                   Hi.settings01,
+      //                   Hi.file01,
+      //                   Hi.informationCircle,
+      //                 ][i])),
+      //           ),
+
+      //           AccountOption(
+      //             options: [
+      //               'Absen',
+      //               'Akun & Data Diri',
+      //               'Change Password',
+      //               'Kasbon',
+      //               'Buku Bank',
+      //               'bonus',
+      //               'Cuti',
+      //             ].generate((l, i) => Menu(
+      //                 l,
+      //                 [
+      //                   Hi.chatGpt,
+      //                   Hi.user,
+      //                   Hi.circleLock01,
+      //                   Hi.link04,
+      //                   Hi.link04,
+      //                   Hi.link04,
+      //                   Hi.notificationSquare
+      //                 ][i])),
+      //           ),
+
+      //           AccountOption(
+      //             options: [
+      //               'Logout',
+      //             ].generate((l, i) => Menu(
+      //                 l,
+      //                 [
+      //                   Hi.logout01,
+      //                 ][i])),
+      //           ),
+
+      //           Row(
+      //             children: [
+      //               const LzImage(
+      //                 'ic_launcher.png',
+      //                 size: 50,
+      //                 radius: 5,
+      //               ).lz.border(Br.all(), radius: Br.radius(5)),
+      //               Column(
+      //                 children: [
+      //                   Text('Q-Tech', style: Gfont.bold),
+      //                   Text('Version. 1.0.0 241208.1',
+      //                       style: Gfont.fs14.muted)
+      //                 ],
+      //               ).start
+      //             ],
+      //           ).gap(15).padding(t: 10, b: 50)
+      //         ],
+      //       ).start.gap(25),
+      //     )
+      //   ],
+      // ),
+
+
+
+
+
+
+       // switch (menu.label) {
+            //   case 'Logout':
+            //     LzConfirm.show(context,
+            //         title: 'logout',
+            //         message: 'Are you sure want to logout from this account?',
+            //         onConfirm: () {
+            //       AppState.setLogged(false);
+            //       Get.offAllNamed('/login');
+            //     });
+            //     break;
+            //     case 'Absen' :
+            //     Get.toNamed('/absence');
+            //   default:
+            // }
+
+
+
+
+
+
+
+            Obx(() => Container(
+                width: MediaQuery.of(context).size.width,
+                height: controller.height.value,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Color(0xFF750101), Color(0xFF460000)],
+                    begin: Alignment.bottomCenter,
+                    end: Alignment.topCenter,
+                  ),
+                ),
+                child: const Center(
+                  child: Text(
+                    'Kasbon',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              )),
+              LzListView(
+            padding: const EdgeInsets.only(top: 90, bottom: 100),
+            children: [
+              buildKasbonSection('1. Januari 2025', absensiJanuari, controller.showDetailsJanuari),
+              buildKasbonSection('2. Februari 2025', absensiFebruari, controller.showDetailsFebruari),
+            ],
+          ),
+
+
+
+
+
+          Widget buildKasbonSection(String title, List<Map<String, String>> data, RxBool isVisible) {
+    return Obx(
+      () => Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () => isVisible.value = !isVisible.value,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(title, style: const TextStyle(fontSize: 15)),
+                  Icon(
+                    isVisible.value ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                    size: 24,
+                  ),
+                ],
+              ),
+            ),
+            if (isVisible.value)
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(colors: [Color(0xFF750101), Color(0xFF460000)]),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  children: data.map((absen) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(absen['tanggal']!,
+                              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(absen['keterangan']!, style: const TextStyle(fontSize: 13, color: Colors.white)),
+                              Text(absen['status']!, style: const TextStyle(fontSize: 15, color: Colors.white)),
+                            ],
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text('Validasi :', style: TextStyle(fontSize: 12, color: Colors.white70)),
+                              Text(absen['validasi']!,
+                                  style: const TextStyle(fontSize: 12, color: Colors.white70, fontWeight: FontWeight.bold)),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+
+
+
+
+
+  Stack(
+          children: [
+            // Header
+            Obx(() => Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: controller.height.value,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Color(0xFF750101), Color(0xFF460000)],
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                    ),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Kasbon',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )),
+        
+            // ListView
+            LzListView(
+              physics: const NeverScrollableScrollPhysics(),
+              gap: 20,
+              padding: Ei.only(t: 140 - 50, b: 100),
+              onScroll: (value) {
+                double pixels = value.pixels;
+                controller.adjustHeader(
+                  pixels < 0
+                      ? 250 + pixels.abs()
+                      : (250 - pixels.abs()).clamp(0, 500),
+                );
+              },
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15, top: 15),
+                  child: Container(
+                    height: 70,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        colors: [Color(0xFF100C58), Color(0xFF5E5BA7)],
+                        begin: Alignment.centerLeft,
+                        end: Alignment.centerRight,
+                      ),
+                    ),
+                    child: Stack(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 17, top: 10),
+                              child: Text(
+                                'Sisa Saldo Bareel Husein',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 17, top: 5),
+                              child: Text(
+                                'Rp. - 100.000.000,-',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Positioned(
+                          right: 17,
+                          top: 10,
+                          child: Column(
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  controller.showAjukanForm(context);
+                                },
+                                child: Container(
+                                  width: 35,
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                        // ignore: deprecated_member_use
+                                        color: Colors.black.withOpacity(0.2),
+                                        blurRadius: 5,
+                                        spreadRadius: 1,
+                                      ),
+                                    ],
+                                  ),
+                                  child:
+                                      const Icon(Icons.add, color: Colors.blue),
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              const Text(
+                                'Ajukan',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  child: Container(
+                    height: 40,
+                    decoration: BoxDecoration(
+                        color: Color(0xFF750101),
+                        borderRadius: BorderRadius.circular(10)),
+                    child: Align(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Perhatian!,',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                          ),
+                          Text(
+                            ' Saldo anda minus...',
+                            style: TextStyle(color: Colors.white, fontSize: 14),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Text(
+                    'Daftar Kasbon :',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: Obx(
+                    () {
+                      return GestureDetector(
+                        onTap: () {
+                          controller.showDetails.value =
+                              !controller.showDetails.value;
+                        },
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  ' 1. Januari 2025',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                Icon(
+                                  controller.showDetails.value
+                                      ? Icons.keyboard_arrow_up
+                                      : Icons.keyboard_arrow_down,
+                                  size: 24,
+                                ),
+                              ],
+                            ),
+                            if (controller.showDetails.value)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Container(
+                                  width: MediaQuery.of(context).size.width * 0.9,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                        colors: ['750101'.hex, '460000'.hex]),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: ListView.builder(
+                                    physics: BouncingScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: absensiFebruari.length,
+                                    itemBuilder: (context, index) {
+                                      final absen = absensiFebruari[index];
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            bottom: 10, left: 20, right: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            if (index == 0)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 15),
+                                                child: (Text(
+                                                  absen['tanggal']!,
+                                                  style: TextStyle(
+                                                      fontSize: 17,
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Colors.white,
+                                                      fontFamily: 'PassionOne'),
+                                                )),
+                                              ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Text(absen['keterangan']!,
+                                                    style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: Colors.white,
+                                                        fontFamily: 'Poppins')),
+                                                Text(absen['status']!,
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        color: Colors.white,
+                                                        fontFamily: 'Poppins')),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 5),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 10),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    'Validasi :',
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.white70,
+                                                        fontWeight: Fw.bold),
+                                                  ),
+                                                  Text(
+                                                    absen['validasi']!,
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.white70,
+                                                        fontWeight: Fw.bold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.snackbar('Info', 'Data bulan Januari tidak ditambahkan');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 24, right: 19),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '2. Januari 2025',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        SizedBox(width: 5),
+                        Icon(
+                          showDetails
+                              // ignore: dead_code
+                              ? Icons.keyboard_arrow_up
+                              : Icons.keyboard_arrow_down,
+                          size: 24,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.snackbar('Info', 'Data bulan Januari tidak ditambahkan');
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 24, right: 19),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '3. Januari 2025',
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        SizedBox(width: 5),
+                        Icon(
+                          showDetails
+                              // ignore: dead_code
+                              ? Icons.keyboard_arrow_up
+                              : Icons.keyboard_arrow_down,
+                          size: 24,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),

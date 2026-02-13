@@ -1,0 +1,149 @@
+- Penambahan relasi ke detail pengajuan departemen IT, Legal, Logistik di menu Pengajuan BSD (Q-Tech Mobile)
+- Pembuatan Model Kasbon BSD (Q-Tech Mobile)
+- Pembuatan Controller kasbon BSD (Q-Tech Mobile)
+- Pembuatan Listview kasbon BSD (Q-Tech Mobile)
+- Pembuatan Menu Detail kasbon BSD (Q-Tech Mobile)
+- Pembuatan fitur cetak kasbon BSD (Q-Tech Mobile)
+- Pembuatan Model PTJ BSD (Q-Tech Mobile)
+- Pembuatan Controller PTJ BSD (Q-Tech Mobile)
+- Pembuatan Listview PTJ BSD (Q-Tech Mobile)
+- Pembuatan menu detail PTJ BSD  (Q-Tech Mobile)
+- Pembuatan fitur cetak PTJ BSD (Q-Tech Mobile)
+- Pembuatan Model Saldo BSD (Q-Tech Mobile)
+- Pembuatan Controller saldo BSD (Q-Tech Mobile)
+- Pembuatan Listview Saldo BSD (Q-Tech Mobile)
+- Pembuatan fitur search di menu saldo BSD  (Q-Tech Mobile)
+
+ 
+- Pembuatan Listview Validasi Delivery pembelian non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi Delivery pembelian non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi Delivery pembelian non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi Delivery pembelian ppn non Logistik di menu Dir. BSD (Qtech Mobile)
+
+
+- Pembuatan Listview Validasi Delivery pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi Delivery pembelian ppn Logistik di menu Dir. BSD di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi Delivery pembelian ppn Logistik di menu Dir. BSD di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi Delivery pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+
+
+- Pembuatan Listview Validasi Delivery Po non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi Delivery Po non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi Delivery Po non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi Delivery Po ppn non Logistik di menu Dir. BSD (Qtech Mobile)
+
+- Pembuatan Listview Validasi Delivery Po ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi Delivery Po ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi Delivery Po ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi Delivery Po ppn Logistik di menu Dir. BSD (Qtech Mobile)
+
+- Pembuatan Listview Validasi Invoice Delivery pembelian non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi Invoice Delivery pembelian non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi Invoice Delivery pembelian non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi Invoice Delivery pembelian ppn non Logistik di menu Dir. BSD (Qtech Mobile)
+
+- Pembuatan Listview Validasi Invoice Delivery pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi Invoice Delivery pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi Invoice Delivery pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi Invoice Delivery pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+
+
+//
+
+
+- Pembuatan Listview Validasi pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi pembelian ppn Logistik di menu Dir. BSD (Qtech Mobile)
+
+- Pembuatan Listview Validasi PO Non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi PO Non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi PO Non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi PO Non ppn Logistik di menu Dir. BSD (Qtech Mobile)
+
+
+- Pembuatan Listview Validasi PO ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan Fitur Validasi PO ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Pembuatan menu detail/info Validasi PO ppn Logistik di menu Dir. BSD (Qtech Mobile)
+- Menambahkan fitur search di menu validasi PO ppn Logistik di menu Dir. BSD (Qtech Mobile)
+
+
+
+
+
+
+
+
+
+Menu 
+- keamanan
+- notifikasi
+- change regional 
+- panduan instalasi
+- feedback / Hubungi kami
+- kalkulator
+- ganti password
+- profil
+- Logout
+- versi
+
+
+Daftar karyawan :
+Theos kornotan (AM) 
+Siti Rosita ( staf finance) // done
+Solahudin ( staf logistik) // done
+Diki prindana (PM)
+Rehan (sem)
+Yaman (som)/
+Rakay (PM) // done
+Dedy (sem)/
+David (som)
+Ragil (pm)
+Yehezkiel (sem)/
+Aep (som)/ 
+
+
+validasi laporan 
+vaidasi gaji
+
+
+
+
+develop bonus,buku bank, laporan pengajuan it,
+ laporan ptj it,
+  laporan pengajuan rnd, 
+  laporang ptj rnd, 
+  arsip surat masuk dir bsd, 
+  arsip surat keluar dir bsd,
+   arsip surat masuk it,
+    arsip surat keluar it, 
+    artikel teknik
+
+
+
+
+
+- NOTULEN: Desain pada jam nya/ waktu rapat , saat mengedit dta yang lama jangan hilang // Done
+- tidak ada menu edit di arsip dir.BSD?
+- Monitoring projek tombol pekerjaan tidak berfungsi // api belum ada
+
+- form pengajuan departemen disarankan error message nya di kastau apa yang salah, solanya aku gak tau jadinya apa salahnya // next update terkait error message
+- Pengajuan kasbon : tamabh kasbon nya belum bisa // Done
+- PTJ itu apa? // pertanggung jawaban setelah pengajuan
+- Brosur logistic dimana? di tombol edit, homeview
+- Daftar TKDN : tidak bisa dihapus // Done
+- Surat internal tidak bisa di edit.// fitur gak ada di qtech web
+- SK direksi : Tambahkan succsess message kalau data berhasil diedit // fitur tidak ada di qtech web
+Kenapa saat di edit jadi pilih gambar TKDN bukan gamabr SK direksi  // fitur tidak ada di qtech web
+ 
+APAKAH DIBROSUR LOGISTIK TIDAK ADA EDIT DAN HAPUS?  // fitur tidak ada di qtech web
+ Menu dir BSD
+Arsip dir BSD:
+1. Arsip dir BSD apakah tidak ada hapus dan edit?  // fitur tidak ada di qtech web
+2. Surat keluar disiini belum bisa // done
+3. Surat belum bisa/ apa bedanya yang surat dan tamba // surat buat perorang, tambah buat departemen
+4. form pengajuan departemen disarankan error message nya di kastau apa yang salah, solanya aku gak tau jadinya apa salahnya // next update terkait error message
+5. Pengajuan kasbon : tamabh kasbon nya belum bisa // Done
+6. Saldo dir bsd gak bisa + nya // Done
+7. Setting katergori rk gak bisa nambah (edit sama infonya gak bisa)
+8. Validasi cuti status/Kesimpulan validasinya gak bisa diubah // DOne

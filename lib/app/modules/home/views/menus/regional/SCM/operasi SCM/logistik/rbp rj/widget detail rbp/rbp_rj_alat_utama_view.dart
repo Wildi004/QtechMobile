@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lazyui/lazyui.dart';
+import 'package:qrm_dev/app/data/models/model logistik/rbp_rb_nohide/rbp_rb_nohide.dart';
+import 'package:qrm_dev/app/modules/home/controllers/LOGISTIK/Rbp%20Rj%20Logistik/rbp_rj_logistik_controller.dart';
+import 'package:qrm_dev/app/widgets/custom_loading.dart';
+
+class RbpRjAlatUtamaView extends GetView<RbpRjLogistikController> {
+  final String? noHide;
+  final RbpRbNohide? data;
+
+  const RbpRjAlatUtamaView({super.key, this.noHide, this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    if (noHide != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) async {
+        await controller.getDetailByNoHide(noHide!);
+      });
+    }
+
+    return Obx(() {
+      if (controller.isDetailLoading.value) {
+        return CustomLoading();
+      }
+
+      if (controller.detailDatas.isEmpty) {
+        return const Center(child: Text("Data tidak ditemukan"));
+      }
+
+      final items = controller.detailDatas.first.alatUtama ?? [];
+
+      return LzListView(
+        padding: EdgeInsets.zero,
+        children: [
+          ...items.asMap().entries.map((entry) {
+            final i = entry.key;
+            final item = entry.value;
+
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              child: LzCard(
+                children: [
+                  Text(
+                    'Item ${i + 1}',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const Divider(),
+                  _buildBoldText('Uraian', item.kodeProyek),
+                  _buildBoldText('Jumlah', item.jumlahAu),
+                  _buildBoldText('Durasi(Hari)', item.durasiAu),
+                  _buildBoldText('Harga Satuan', item.hargaSatuan),
+                  _buildBoldText('Total Harga', item.totalHargaAu),
+                ],
+              ),
+            );
+          }),
+        ],
+      );
+    });
+  }
+}
+
+Widget _buildBoldText(String title, dynamic value) {
+  return Text.rich(
+    TextSpan(
+      children: [
+        TextSpan(
+          text: '$title : ',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        TextSpan(
+          text: value?.toString() ?? '-',
+        ),
+      ],
+    ),
+  );
+}

@@ -1,0 +1,91 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lazyui/lazyui.dart';
+import 'package:qrm_dev/app/modules/home/controllers/BSD/Validasi%20Dir%20BSD/val_pengajuan_dep_controller.dart';
+import 'package:qrm_dev/app/widgets/custom_appbar_widget.dart';
+import 'package:qrm_dev/app/widgets/custom_loading.dart';
+
+class ValPengajuanDepView extends GetView<ValPengajuanDepController> {
+  const ValPengajuanDepView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    Get.lazyPut(() => ValPengajuanDepController());
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          Get.back(result: true);
+        }
+      },
+      child: Scaffold(
+        appBar: CustomAppbar(title: 'Validasi Pengajuan Departemen').appBar,
+        backgroundColor: Colors.grey[100],
+        body: Obx(() {
+          if (controller.isLoading.value) {
+            return CustomLoading();
+          }
+
+          if (controller.dataValidasi.isEmpty) {
+            return const Center(child: Text('Tidak ada data.'));
+          }
+
+          return LzListView(
+            onRefresh: () => controller.getData(),
+            gap: 10,
+            padding: Ei.all(15),
+            children: [
+              for (int i = 0; i < controller.dataValidasi.length; i++)
+                InkWell(
+                  onTap: () => controller.onItemTap(i),
+                  child: Container(
+                    padding: Ei.sym(v: 14, h: 16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: Br.radius(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 3,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      mainAxisAlignment: Maa.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            controller.dataValidasi[i]['title'],
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        controller.dataValidasi[i]['count'] > 0
+                            ? Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 8, vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: Colors.redAccent,
+                                  borderRadius: Br.radius(12),
+                                ),
+                                child: Text(
+                                  '${controller.dataValidasi[i]['count']}',
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )
+                            : Icon(Hi.notification01, color: Colors.grey),
+                      ],
+                    ),
+                  ),
+                ),
+            ],
+          );
+        }),
+      ),
+    );
+  }
+}
